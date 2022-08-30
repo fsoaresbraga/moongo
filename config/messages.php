@@ -33,19 +33,19 @@ return [
         'type' => 'warning',
         'icon' => 'fa-solid fa-circle-exclamation',
         'title' => 'Atenção!',
-        'message' => 'Erro ao criar produto.'
+        'message' => 'Erro ao criar Produto.'
     ],
     'errorUpdateProduct' => [
         'type' => 'warning',
         'icon' => 'fa-solid fa-circle-exclamation',
         'title' => 'Atenção!',
-        'message' => 'Erro ao editar produto.'
+        'message' => 'Erro ao editar Produto.'
     ],
     'productNotFound' => [
         'type' => 'warning',
         'icon' => 'fa-solid fa-circle-exclamation',
         'title' => 'Atenção!',
-        'message' => 'Produto não encontrado.'
+        'message' => 'Produto não Encontrado.'
     ],
     'successCreateProduct' => [
         'type' => 'success',
@@ -58,6 +58,36 @@ return [
         'icon' => 'fa-solid fa-circle-exclamation',
         'title' => 'Atenção!',
         'message' => 'Produto editado com Sucesso.'
+    ],
+    'movementNotFound' => [
+        'type' => 'warning',
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Atenção!',
+        'message' => 'Movimentação não Encontrada.'
+    ],
+    'errorCreateMovement' => [
+        'type' => 'warning',
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Atenção!',
+        'message' => 'Erro ao criar Movimentação.'
+    ],
+    'successCreateMovement' => [
+        'type' => 'success',
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Atenção!',
+        'message' => 'Movimentação criada com Sucesso.'
+    ],
+    'successUpdateMovement' => [
+        'type' => 'success',
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Atenção!',
+        'message' => 'Movimentação editada com Sucesso.'
+    ],
+    'errorUpdateMovement' => [
+        'type' => 'warning',
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Atenção!',
+        'message' => 'Erro ao editar Movimentação.'
     ],
 ]
 

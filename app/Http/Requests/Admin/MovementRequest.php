@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Movement;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class MovementRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class MovementRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +23,57 @@ class MovementRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Movement $movement)
     {
-        return [
-            //
+        //$uuid = $this->id;
+
+        $rules = [
+            'origin' => [
+                'required',
+                'exists:origins,id'
+            ],
+            'destination' => [
+                'required',
+                'exists:destinations,id'
+            ],
+            'category_movement' => [
+                'required',
+                'exists:category_movements,id'
+            ],
+
+            'type_movement' => [
+                'required',
+                'exists:type_movements,id'
+
+            ],
+
+            'product' => [
+                'required',
+                'exists:products,id'
+            ],
+
+            'bar_code' => [
+                'required',
+            ],
+
+            'quantity' => [
+                'required'
+            ],
+
+            'date_expiration' => [
+                'required',
+                'date_format:d/m/Y'
+            ],
+
+            'cost' => [],
+
         ];
+
+        return $rules;
+    }
+
+    protected function failedValidation(Validator $validator) {
+
+        return back()->with(config('messages.verifyForm'))->withInput();
     }
 }

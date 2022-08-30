@@ -9,8 +9,8 @@ class CategoryMovementRepository {
 
     private $repo_category;
 
-    public function __construct(CategoryMovement $model_destiantion) {
-        $this->repo_category = $model_destiantion;
+    public function __construct(CategoryMovement $model_destination) {
+        $this->repo_category = $model_destination;
     }
 
     public function getCategoryMovement() {

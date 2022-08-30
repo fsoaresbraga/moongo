@@ -32,7 +32,55 @@
                         </div>
                     </div>
                 @else
-                    <h1>tabela aqui</h1>
+                <div class="dt-responsive table-responsive">
+                    <table id="movement-search" class="table table-bordered nowrap">
+                        <thead>
+                            <tr>
+                                <th >Produto </th>
+                                <th class="nosort">Código de Barras</th>
+                                <th >Origen</th>
+                                <th>Destino</th>
+                                <th class="nosort">Categoria Movimentação</th>
+                                <th class="nosort">Tipo Movimentação</th>
+                                <th class="nosort">Data de Validade</th>
+                                <th class="nosort">Custo</th>
+                                <th class="nosort">Opção</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach ($movements as $movement)
+                                <tr>
+                                    <td>{{$movement->product->title}}</td>
+                                    <td>{{$movement->bar_code}}</td>
+                                    <td>{{($movement->origin->name)}}</td>
+                                    <td>{{($movement->destination->name)}}</td>
+                                    <td>{{($movement->categoryMovement->name)}}</td>
+                                    <td>{{($movement->typeMovement->name)}}</td>
+                                    <td>{{(date('d/m/Y', strtotime($movement->expiration)))}}</td>
+                                    <td>0</td>
+                                    <td>
+                                        <a href="{{route('admin.movement.show', $movement->id)}}" class="btn btn-outline-secondary btn-icon-text"> Editar <i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th >Produto </th>
+                                <th class="nosort">Código de Barras</th>
+                                <th >Origen</th>
+                                <th>Destino</th>
+                                <th class="nosort">Categoria Movimentação</th>
+                                <th class="nosort">Tipo Movimentação</th>
+                                <th class="nosort">Data de Validade</th>
+                                <th class="nosort">Custo</th>
+                                <th class="nosort">Opção</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
                 @endif
             </div>

@@ -36,7 +36,7 @@
                         <table id="footer-search" class="table  table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th >Título </th>
+                                    <th >Descrição </th>
                                     <th class="nosort">SKU</th>
                                     <th >Marca</th>
                                     <th>Categoria</th>
@@ -66,7 +66,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th class="input-search">Título </th>
+                                    <th class="input-search">Descrição </th>
                                     <th class="input-search">SKU</th>
                                     <th class="input-search">Marca</th>
                                     <th class="input-search">Categoria</th>

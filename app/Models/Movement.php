@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Movements extends Model
+class Movement extends Model
 {
     use HasFactory, Notifiable, UuidTrait;
 
@@ -16,7 +16,7 @@ class Movements extends Model
 
     protected $keyType = 'uuid';
 
-    protected $table = 'destinations';
+    protected $table = 'movements';
 
     //protected $fillable = [];
 
@@ -29,5 +29,26 @@ class Movements extends Model
         'taxi_id', 'origin_id', 'destination_id', 'category_movement_id', 'type_movement_id',
         'product_id', 'bar_code', 'quantity', 'expiration', 'cost'
     ];
+
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function origin() {
+        return $this->belongsTo(Origin::class);
+    }
+
+    public function destination() {
+        return $this->belongsTo(Destination::class);
+    }
+
+    public function categoryMovement() {
+        return $this->belongsTo(CategoryMovement::class);
+    }
+
+    public function typeMovement() {
+        return $this->belongsTo(TypeMovement::class);
+    }
 }
 

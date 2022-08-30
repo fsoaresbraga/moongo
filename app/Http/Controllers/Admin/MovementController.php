@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CategoryMovementRepository;
-use App\Repositories\Admin\DestinationRepository;
-use App\Repositories\Admin\MovementRepository;
+use App\Http\Requests\Admin\MovementRequest;
 use App\Repositories\Admin\OriginRepository;
 use App\Repositories\Admin\ProductRepository;
+use App\Repositories\Admin\MovementRepository;
+use App\Repositories\Admin\DestinationRepository;
 use App\Repositories\Admin\TypeMovementRepository;
+use App\Repositories\Admin\CategoryMovementRepository;
 
 class MovementController extends Controller
 {
@@ -19,7 +20,7 @@ class MovementController extends Controller
     private $repo_category_movement;
     private $repo_type_movement;
     private $repo_product;
-    
+
     public function __construct(
         MovementRepository $movementRepository,
         OriginRepository $originRepository,
@@ -37,7 +38,9 @@ class MovementController extends Controller
 
     public function index() {
         $movements = $this->repo_movement->getMovements();
-        
+
+        //dd($movements);
+
         return view('Admin.Movement.index', compact('movements'));
     }
 
@@ -62,30 +65,30 @@ class MovementController extends Controller
             return view('Admin.Product.show', compact('product', 'categories', 'brands'));
         }
 
-        return redirect()->route('admin.product.index')->with(config('messages.productNotFound'));
+        return redirect()->route('admin.product.index')->with(config('messages.movementNotFound'));
 
     }
 
-    public function store(ProductRequest $request) {
+    public function store(MovementRequest $request) {
 
-        $product = $this->repo_movement->setStoreProduct($request->validated());
+        $movement = $this->repo_movement->setStoreMovement($request->validated());
 
-        if($product) {
-            return redirect()->route('admin.product.index')->with(config('messages.successCreateProduct'));
+        if($movement) {
+            return redirect()->route('admin.movement.index')->with(config('messages.successCreateMovement'));
         }
 
-        return back()->with(config('messages.errorCreateProduct'))->withInput();
+        return back()->with(config('messages.errorCreateMovement'))->withInput();
 
     }
 
-    public function update($id, ProductRequest $request) {
+    public function update($id, MovementRequest $request) {
 
         $product = $this->repo_movement->setUpdateProduct($id, $request->validated());
 
         if($product) {
-            return redirect()->route('admin.product.index')->with(config('messages.successUpdateProduct'));
+            return redirect()->route('admin.product.index')->with(config('messages.successUpdateMovement'));
         }
 
-        return back()->with(config('messages.errorUpdateProduct'))->withInput();
+        return back()->with(config('messages.errorUpdateMovement'))->withInput();
     }
 }

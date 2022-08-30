@@ -2,42 +2,48 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\Movements;
-use App\Models\Product;
+use Carbon\Carbon;
+use App\Models\Movement;
+use Illuminate\Support\Str;
 
 class MovementRepository {
 
     private $repo_movement;
 
-    public function __construct(Movements $model_movement) {
+    public function __construct(Movement $model_movement) {
         $this->repo_movement = $model_movement;
     }
 
     public function getMovements() {
-        //return $this->repo_movement::with('brand', 'category')->orderBy('title', 'ASC')->get();
-        return [];
+        return $this->repo_movement::with('product', 'origin', 'destination', 'categoryMovement', 'typeMovement' )
+                                    ->orderBy('created_at', 'DESC')->get();
+
     }
 
-    public function setStoreProduct(array $req) {
-        
-        $product = $this->repo_movement->create([
-            'brand_id' => $req['brand'],
-            'category_id' => $req['category'],
-            'sku' => $req['sku'],
-            'title' => $req['title'],
-            'cost' => isset($req['cost']) ? $this->convertDecimalValue($req['cost']) : null,
-            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->convertDecimalValue($req['last_purchase_cost']) : null,
-            'sale_price' => isset($req['sale_price']) ? $this->convertDecimalValue($req['sale_price']) : null
+    public function setStoreMovement(array $req) {
 
+        
+        $movement = $this->repo_movement->create([
+
+            'taxi_id' => (String) Str::uuid(),
+            'origin_id' => $req['origin'],
+            'destination_id' => $req['destination'],
+            'category_movement_id' => $req['category_movement'],
+            'type_movement_id' => $req['type_movement'],
+            'product_id' => $req['product'],
+            'bar_code' => $req['bar_code'],
+            'quantity' => $req['quantity'],
+            'expiration' => Carbon::parse($req['date_expiration'])->format('Y-m-d'),
+            'cost'=> 0
        ]);
 
-       if($product) {
+       if($movement) {
             return true;
        }
         return false;
     }
 
-    public function getProductById($id) {
+    public function getMovementById($id) {
 
         $product = $this->repo_movement->find($id);
 

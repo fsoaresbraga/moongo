@@ -18,7 +18,7 @@
         </nav>
 
     </div>
-    <!-- 
+    <!--
         'product_id', 'bar_code', 'quantity', 'expiration', 'cost'-->
     <div class="row">
       <div class="col-md-12 grid-margin stretch-card">
@@ -32,7 +32,7 @@
                         <div class="form-group @if($errors->has('origin')) is-invalid  @endif">
 
                             <label>Origem</label>
-                            <select class="js-example-basic-single form-control"  name="origin">
+                            <select class="js-example-basic-single form-control @if($errors->has('origin')) is-invalid  @endif"  name="origin">
                                 <option value="#" disabled selected>informe uma Origem</option>
                                 @foreach($origins as $origin)
                                     <option value="{{$origin->id}}">{{$origin->name}}</option>
@@ -43,11 +43,11 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="form-group @if($errors->has('destination')) is-invalid  @endif">
                             <label>Destino</label>
-                            <select class="js-example-basic-single form-control"  name="destination">
+                            <select class="js-example-basic-single form-control @if($errors->has('destination')) is-invalid  @endif"  name="destination">
                                 <option value="#" disabled selected>informe um Destino</option>
                                 @foreach($destinations as $destination)
                                     <option value="{{$destination->id}}">{{$destination->name}}</option>
@@ -62,8 +62,8 @@
                     <div class="col-md-6">
                         <div class="form-group @if($errors->has('category_movement')) is-invalid  @endif">
                             <label>Categoria Movimentação</label>
-                            <select class="js-example-basic-single form-control"  name="category_movement">
-                                <option value="#" disabled selected>informe um Destino</option>
+                            <select class="js-example-basic-single form-control @if($errors->has('category_movement')) is-invalid  @endif"  name="category_movement">
+                                <option value="#" disabled selected>informe uma Categoria de Movimentação</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
@@ -77,8 +77,8 @@
                     <div class="col-md-6">
                         <div class="form-group @if($errors->has('type_movement')) is-invalid  @endif">
                             <label>Tipo Movimentação</label>
-                            <select class="js-example-basic-single form-control"  name="type_movement">
-                                <option value="#" disabled selected>informe um Destino</option>
+                            <select class="js-example-basic-single form-control @if($errors->has('type_movement')) is-invalid  @endif"  name="type_movement">
+                                <option value="#" disabled selected>informe um Tipo de Movimentação</option>
                                 @foreach($types as $type)
                                     <option value="{{$type->id}}">{{$type->name}}</option>
                                 @endforeach
@@ -90,16 +90,16 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group @if($errors->has('products')) is-invalid  @endif">
+                        <div class="form-group @if($errors->has('product')) is-invalid  @endif">
                             <label>Produto</label>
-                            <select class="js-example-basic-single form-control"  name="products">
+                            <select class="js-example-basic-single form-control @if($errors->has('product')) is-invalid  @endif"  name="product">
                                 <option value="#" disabled selected>informe um Produto</option>
                                 @foreach($products as $product)
                                     <option value="{{$product->id}}">{{$product->title}}</option>
                                 @endforeach
                             </select>
-                            @if($errors->has('products'))
-                                <div class="invalid-feedback">{{ $errors->first('products') }}</div>
+                            @if($errors->has('product'))
+                                <div class="invalid-feedback">{{ $errors->first('product') }}</div>
                             @endif
                         </div>
                     </div>
@@ -127,7 +127,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="date_expiration">Data de Vencimento</label>
-                            <input type="text" name="date_expiration" class="form-control date" id="date_expiration" placeholder="Data de Vencimento" value="{{old('date_expiration')}}">
+                            <input type="text" name="date_expiration" class="form-control date @if($errors->has('date_expiration')) is-invalid  @endif" id="date_expiration" placeholder="Data de Vencimento" value="{{old('date_expiration')}}">
+                            @if($errors->has('date_expiration'))
+                                <div class="invalid-feedback">{{ $errors->first('date_expiration') }}</div>
+                            @endif
                         </div>
                     </div>
 
