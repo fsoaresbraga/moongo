@@ -25,7 +25,6 @@ class CreateMovementsTable extends Migration
             $table->string('quantity')->nullable(true);
             $table->dateTime('expiration')->nullable(true);
             $table->decimal('cost', 7,2)->nullable(true);
-            $table->decimal('sale_price', 7,2)->nullable(true);
             $table->timestamps();
         });
     }

@@ -1,4 +1,5 @@
 @extends('Admin.Layout.app')
+@section('title', 'Dashboard Moongo')
 @section('content')
 <div class="content-wrapper">
     <div class="row">

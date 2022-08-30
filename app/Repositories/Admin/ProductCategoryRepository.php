@@ -13,8 +13,10 @@ class ProductCategoryRepository {
     }
 
     public function getCategories() {
-        return $this->model_category::where('status', '1')->get();
+        return $this->model_category::where('status', '1')->orderBy('name', 'ASC')->get();
     }
 
 
 }
+
+

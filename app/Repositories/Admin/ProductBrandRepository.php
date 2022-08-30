@@ -13,7 +13,7 @@ class ProductBrandRepository {
     }
 
     public function getBrands() {
-        return $this->model_brand->where('status', '1')->get();
+        return $this->model_brand->where('status', '1')->orderBy('name', 'ASC')->get();
     }
 
 

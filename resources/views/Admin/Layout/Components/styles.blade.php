@@ -4,5 +4,8 @@
 <link rel="stylesheet" href="{{asset('admin/vendors/flag-icon-css/css/flag-icon.min.css')}}">
 <link rel="stylesheet" href="{{asset('admin/vendors/owl-carousel-2/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{asset('admin/vendors/owl-carousel-2/owl.theme.default.min.css')}}">
+<link rel="stylesheet" href="{{asset('admin/vendors/notification/notification.css')}}">
+<link rel="stylesheet" href="{{asset('admin/css/jquery.dataTables.min.css')}}">
+<link rel="stylesheet" href="{{asset('admin/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+

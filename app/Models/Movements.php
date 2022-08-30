@@ -27,7 +27,7 @@ class Movements extends Model
      */
     protected $fillable = [
         'taxi_id', 'origin_id', 'destination_id', 'category_movement_id', 'type_movement_id',
-        'product_id', 'bar_code', 'quantity', 'expiration', 'cost', 'sale_price'
+        'product_id', 'bar_code', 'quantity', 'expiration', 'cost'
     ];
 }
 

@@ -17,13 +17,8 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('cpf');
-            $table->date('birth_date');
-            $table->enum('gender', ['M', 'F']);
             $table->string('password');
-            $table->string('image');
-            $table->integer('hash');
-            $table->string('qr_code');
+            $table->boolean('administrator');
             $table->timestamps();
         });
     }

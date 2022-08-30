@@ -1,0 +1,16 @@
+[2022-08-29 20:26:18] local.ERROR: Uncaught Symfony\Component\Finder\Exception\DirectoryNotFoundException: The "C:\www\moongo\sistema\resources\views" directory does not exist. in C:\www\moongo\vendor\symfony\finder\Finder.php:592
+Stack trace:
+#0 C:\www\moongo\vendor\laravel\framework\src\Illuminate\Filesystem\Filesystem.php(535): Symfony\Component\Finder\Finder->in('C:\\www\\moongo\\s...')
+#1 Command line code(1): Illuminate\Filesystem\Filesystem->files('C:\\www\\moongo\\s...')
+#2 Command line code(1): getViews('C:\\www\\moongo\\s...', Object(Illuminate\Filesystem\Filesystem))
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Symfony\\Component\\Finder\\Exception\\DirectoryNotFoundException: The \"C:\\www\\moongo\\sistema\\resources\\views\" directory does not exist. in C:\\www\\moongo\\vendor\\symfony\\finder\\Finder.php:592
+Stack trace:
+#0 C:\\www\\moongo\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(535): Symfony\\Component\\Finder\\Finder->in('C:\\\\www\\\\moongo\\\\s...')
+#1 Command line code(1): Illuminate\\Filesystem\\Filesystem->files('C:\\\\www\\\\moongo\\\\s...')
+#2 Command line code(1): getViews('C:\\\\www\\\\moongo\\\\s...', Object(Illuminate\\Filesystem\\Filesystem))
+#3 {main}
+  thrown at C:\\www\\moongo\\vendor\\symfony\\finder\\Finder.php:592)
+[stacktrace]
+#0 {main}
+"} 

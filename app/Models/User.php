@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     protected $keyType = 'uuid';
 
-    protected $table = 'taxi';
+    protected $table = 'users';
 
     //protected $fillable = [];
 
@@ -27,8 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'cpf', 'date_of_birth', 'gender', 'password',
-        'image', 'hash', 'qr_code'
+        'name', 'email', 'password','administrator'
     ];
 
     /**

@@ -89,7 +89,7 @@
       </li>
 
       <li class="nav-item menu-items">
-        <a class="nav-link" href="#">
+        <a href="{{route('admin.movement.index')}}" class="nav-link" href="#">
           <span class="menu-icon">
             <i class="mdi mdi-alpha-m-box-outline"></i>
           </span>

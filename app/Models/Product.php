@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ProductBrand;
 use App\Models\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -26,6 +27,18 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id', 'brand_id', 'sku', 'title', 'cost_price', 'average_cost', 'price'
+        'category_id', 'brand_id', 'sku', 'title', 'cost', 'last_purchase_cost', 'average_cost',
+         'sale_price'
     ];
+
+
+    public function brand() {
+        return $this->belongsTo(ProductBrand::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(ProductCategory::class);
+    }
 }
+
+

@@ -26,6 +26,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BrandTableSeeder::class,
             CategoryTableSeeder::class,
+            UsersTableSeeder::class,
+            CategoryMovementTableSeeder::class,
+            TypeMovementTableSeeder::class,
+            OriginTableSeeder::class,
+            DestinationTableSeeder::class
+
         ]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
 
 class ProductRequest extends FormRequest
 {
@@ -45,29 +45,18 @@ class ProductRequest extends FormRequest
                 'max:60'
 
             ],
-            //'cost_price' => [],
-            //'average_cost' => [],
-            //'price' => [],
-        ]; 
-        
+
+            'cost' => [],
+            'last_purchase_cost' => [],
+            'average_cost' => [],
+            'sale_price' => [],
+        ];
+
         return $rules;
     }
+
+    protected function failedValidation(Validator $validator) {
+
+        return back()->with(config('messages.verifyForm'))->withInput();
+    }
 }
-
-/*
-
-        $uuid = $this->id;
-
-        $rules = [
-
-            'name' => [
-                'required',
-                'min:3',
-                'max:30'
-            ],
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('taxis')->ignore($uuid)
-            ],
-*/ 

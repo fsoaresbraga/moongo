@@ -1,23 +1,24 @@
 @extends('Admin.Layout.app')
-@section('content')
-@extends('Admin.Layout.app')
+@section('title', 'Novo Produto Moongo')
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-    <div class="row">
-        <div class="col-12">
-            <h3 class="page-title"> Novo Produto </h3>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="page-title">Novo Produto </h3>
+            </div>
         </div>
-        
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">Produtos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Novo produto</li>
+            </ol>
+        </nav>
+
     </div>
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Deshboard</a></li>
-          <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">Produtos</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Novo produto</li>
-        </ol>
-      </nav>
-    </div>
+
     <div class="row">
       <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
@@ -25,14 +26,13 @@
             <form action="{{route('admin.product.store')}}" method="POST" class="forms-sample">
                 @csrf
                 <div class="row">
-                    
+
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('brand')) is-invalid  @endif">
 
                             <label>Marca</label>
-                            <select class="js-example-basic-single @if($errors->has('brand')) is-invalid  @endif"  name="brand">
+                            <select class="js-example-basic-single form-control"  name="brand">
                                 <option value="#" disabled selected>informe uma Marca</option>
-                                <option value="AL">Alabama</option>
                                 @foreach($brands as $brand)
                                     <option value="{{$brand->id}}">{{$brand->name}}</option>
                                 @endforeach
@@ -43,9 +43,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('category')) is-invalid  @endif">
                             <label>Categoria</label>
-                            <select class="js-example-basic-single form-control  @if($errors->has('category')) is-invalid  @endif"  name="category">
+                            <select class="js-example-basic-single form-control"  name="category">
                                 <option value="#" disabled selected>informe uma Categoria</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -78,22 +78,24 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="cost_price">Preço de Custo </label>
-                            <input type="text" name="cost_price" class="form-control money" id="cost_price" placeholder="Preço de Custo" value="{{old('cost_price')}}">
+                            <label for="cost">Custo</label>
+                            <input type="text" name="cost" class="form-control money" id="cost" placeholder="Custo" value="{{old('cost')}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="average_cost">Custo Médio </label>
-                            <input type="text" name="average_cost" class="form-control money" id="average_cost" placeholder="Custo Médio" value="{{old('average_cost')}}">
+                            <label for="last_purchase_cost">Custo Última Compra</label>
+                            <input type="text" name="last_purchase_cost" class="form-control money" id="last_purchase_cost" placeholder="Custo Última Compra" value="{{old('last_purchase_cost')}}">
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="price">Preço </label>
-                            <input type="text" name="price" class="form-control money" id="price" placeholder="Preço" value="{{old('price')}}">
+                            <label for="sale_price">Preço Venda</label>
+                            <input type="text" name="sale_price" class="form-control money" id="sale_price" placeholder="Preço Venda" value="{{old('sale_price')}}">
                         </div>
                     </div>
+
                     <div class="col-md-12">
                         <div class="form-group">
                             <button type="submit" class="btn btn-inverse-success btn-fw btn-lg">Criar Produto</button>

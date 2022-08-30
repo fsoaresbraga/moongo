@@ -19,9 +19,10 @@ class CreateProductsTable extends Migration
             $table->uuid('brand_id')->nullable(false);
             $table->string('sku');
             $table->string('title');
-            $table->decimal('cost_price', 7,2)->nullable(true);
+            $table->decimal('cost', 7,2)->nullable(true);
+            $table->decimal('last_purchase_cost', 7,2)->nullable(true);
             $table->decimal('average_cost', 7,2)->nullable(true);
-            $table->decimal('price', 7,2)->nullable(true);
+            $table->decimal('sale_price', 7,2)->nullable(true);
             $table->timestamps();
         });
     }

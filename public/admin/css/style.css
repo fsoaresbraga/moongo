@@ -8771,7 +8771,7 @@ progress {
   --bs-table-hover-bg: #000000;
   width: 100%;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: #bdbdbd !important;
   vertical-align: top;
   border-color: #2c2e33; }
   .table > :not(caption) > * > *, .jsgrid .jsgrid-table > :not(caption) > * > * {
@@ -9638,13 +9638,28 @@ textarea.is-valid.tt-hint {
 .is-invalid ~ .invalid-tooltip {
   display: block; }
 
+
+
+.form-group.is-invalid .select2-container--default .select2-selection--single,
+.form-group.is-invalid  .select2-container--default .select2-dropdown,
+.form-group.is-invalid  .select2-container--default .select2-selection--multiple {
+    border-color: #dc3545 !important;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    border-radius: 4px;
+}
+
 .was-validated .form-control:invalid, .was-validated .asColorPicker-input:invalid, .was-validated .dataTables_wrapper select:invalid, .dataTables_wrapper .was-validated select:invalid, .was-validated .jsgrid .jsgrid-table .jsgrid-filter-row input:invalid[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row .was-validated input:invalid[type=text],
 .was-validated .jsgrid .jsgrid-table .jsgrid-filter-row select:invalid, .jsgrid .jsgrid-table .jsgrid-filter-row .was-validated select:invalid, .was-validated .jsgrid .jsgrid-table .jsgrid-filter-row input:invalid[type=number], .jsgrid .jsgrid-table .jsgrid-filter-row .was-validated input:invalid[type=number], .was-validated .select2-container--default .select2-selection--single:invalid, .select2-container--default .was-validated .select2-selection--single:invalid, .was-validated .select2-container--default .select2-selection--single .select2-search__field:invalid, .select2-container--default .select2-selection--single .was-validated .select2-search__field:invalid, .was-validated .typeahead:invalid,
 .was-validated .tt-query:invalid,
 .was-validated .tt-hint:invalid, .form-control.is-invalid, .is-invalid.asColorPicker-input, .dataTables_wrapper select.is-invalid, .jsgrid .jsgrid-table .jsgrid-filter-row input.is-invalid[type=text],
 .jsgrid .jsgrid-table .jsgrid-filter-row select.is-invalid, .jsgrid .jsgrid-table .jsgrid-filter-row input.is-invalid[type=number], .select2-container--default .is-invalid.select2-selection--single, .select2-container--default .select2-selection--single .is-invalid.select2-search__field, .is-invalid.typeahead,
 .is-invalid.tt-query,
-.is-invalid.tt-hint {
+.is-invalid.tt-hint,
+.js-example-basic-single.form-control:invalid {
   border-color: #dc3545 !important;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -10640,7 +10655,7 @@ textarea.is-invalid.tt-hint {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .fc .btn-group-vertical > button,
   .ajax-upload-dragdrop .btn-group-vertical > .ajax-file-upload,
@@ -17305,7 +17320,7 @@ code {
 .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead,
 .tt-query,
 .tt-hint, .s-example-basic-single select, .s-example-basic-single {
-  border: 1px solid #2c2e33 !important;
+  border: 1px solid #2c2e33;
   height: calc(2.25rem + 2px) !important;
   font-weight: normal !important;
   font-size: 0.875rem !important;
@@ -17319,7 +17334,7 @@ code {
   .tt-hint:focus,
    .s-example-basic-single select:focus, .s-example-basic-single:focus {
     border: 1px solid rgba(71, 164, 71, 0.5) !important;
-    background-color: #2A3038 !important; 
+    background-color: #2A3038 !important;
     color: white !important;}
     .select2-container--default .select2-selection--single .select2-selection__rendered {
       color: #fff !important;
@@ -18277,11 +18292,11 @@ div.tagsinput {
 .table, .jsgrid .jsgrid-table {
   margin-bottom: 0;
   color: #6c7293; }
-  .table thead th, .jsgrid .jsgrid-table thead th {
+  .table thead th, .jsgrid .jsgrid-table thead th, .table tfoot th {
     border-top: 0;
     border-bottom-width: 1px;
     font-weight: 500;
-    color: #6c7293; }
+    color: #ffb102 !important; }
     .table thead th i, .jsgrid .jsgrid-table thead th i {
       margin-left: 0.325rem; }
   .table th, .jsgrid .jsgrid-table th,
@@ -19927,15 +19942,7 @@ div.tagsinput {
   height: 90px;
   border-radius: 100%; }
 
-.auth .auth-form-dark {
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff; }
-  .auth .auth-form-dark .form-control, .auth .auth-form-dark .asColorPicker-input, .auth .auth-form-dark .dataTables_wrapper select, .dataTables_wrapper .auth .auth-form-dark select, .auth .auth-form-dark .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-dark input[type=text],
-  .auth .auth-form-dark .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-dark select, .auth .auth-form-dark .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-dark input[type=number], .auth .auth-form-dark .select2-container--default .select2-selection--single, .select2-container--default .auth .auth-form-dark .select2-selection--single, .auth .auth-form-dark .select2-container--default .select2-selection--single .select2-search__field, .select2-container--default .select2-selection--single .auth .auth-form-dark .select2-search__field, .auth .auth-form-dark .typeahead,
-  .auth .auth-form-dark .tt-query,
-  .auth .auth-form-dark .tt-hint {
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff; }
+
     .auth .auth-form-dark .form-control:-ms-input-placeholder, .auth .auth-form-dark .asColorPicker-input:-ms-input-placeholder, .auth .auth-form-dark .dataTables_wrapper select:-ms-input-placeholder, .dataTables_wrapper .auth .auth-form-dark select:-ms-input-placeholder, .auth .auth-form-dark .jsgrid .jsgrid-table .jsgrid-filter-row input:-ms-input-placeholder[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-dark input:-ms-input-placeholder[type=text],
     .auth .auth-form-dark .jsgrid .jsgrid-table .jsgrid-filter-row select:-ms-input-placeholder, .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-dark select:-ms-input-placeholder, .auth .auth-form-dark .jsgrid .jsgrid-table .jsgrid-filter-row input:-ms-input-placeholder[type=number], .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-dark input:-ms-input-placeholder[type=number], .auth .auth-form-dark .select2-container--default .select2-selection--single:-ms-input-placeholder, .select2-container--default .auth .auth-form-dark .select2-selection--single:-ms-input-placeholder, .auth .auth-form-dark .select2-container--default .select2-selection--single .select2-search__field:-ms-input-placeholder, .select2-container--default .select2-selection--single .auth .auth-form-dark .select2-search__field:-ms-input-placeholder, .auth .auth-form-dark .typeahead:-ms-input-placeholder,
     .auth .auth-form-dark .tt-query:-ms-input-placeholder,
@@ -20084,7 +20091,7 @@ div.tagsinput {
       .navbar .navbar-brand-wrapper .navbar-brand img {
         width: 100%;
         max-width: 100%;
-        
+
         margin: auto;
         vertical-align: middle; }
       .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini {
@@ -20092,7 +20099,7 @@ div.tagsinput {
         .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
           width: 100%;
           max-width: 100%;
-        
+
           margin: auto; }
   .navbar .navbar-menu-wrapper {
     transition: width 0.25s ease;
@@ -20376,7 +20383,7 @@ div.tagsinput {
         .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini img {
           width: 100%;
           max-width: 100%;
-          margin: auto; 
+          margin: auto;
         }
   .sidebar .nav {
     overflow: hidden;
@@ -20858,7 +20865,28 @@ div.tagsinput {
 }
 .loader img{
     position: relative;
-    left: 40%;
-    top: 40%;
-    width: 181px;
+    left: 44%;
+    top: 44%;
+    width: 180px;
+}
+
+
+.select2-container--default .select2-selection--single .select2-search__field, .select2-container--default .select2-dropdown .select2-search__field, .select2-container--default .select2-selection--multiple .select2-search__field {
+    border-color: #dfdfdf !important;
+    background-color: #242424 !important;
+    color: white !important;
+}
+.dataTables_wrapper label {
+    color: #fff;
+}
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+  color: #fff !important;
+  margin-bottom: 20px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: #d3d3d3 !important;
+}
+.dataTables_wrapper .dataTables_filter input {
+  color: #fff;
 }
