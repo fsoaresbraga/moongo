@@ -15,7 +15,7 @@ class CreateMovementsTable extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('taxi_id')->nullable(false);
+            $table->uuid('user_id')->nullable(false);
             $table->uuid('origin_id')->nullable(false);
             $table->uuid('destination_id')->nullable(false);
             $table->uuid('category_movement_id')->nullable(false);
@@ -26,6 +26,8 @@ class CreateMovementsTable extends Migration
             $table->date('expiration')->nullable(true);
             $table->decimal('cost', 7,2)->nullable(true);
             $table->timestamps();
+            $table->uuid('user_delete')->nullable(true);
+            $table->softDeletes();
         });
     }
 

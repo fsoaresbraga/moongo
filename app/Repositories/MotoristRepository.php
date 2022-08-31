@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use Carbon\Carbon;
-use App\Models\Taxi;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Mail\SendMailWelcome;
 
@@ -13,21 +13,21 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class TaxiRepository {
+class MotoristRepository {
 
-    private $repo_taxi;
+    private $repo_motorist;
 
-    public function __construct(Taxi $model_taxi) {
-        $this->repo_taxi = $model_taxi;
+    public function __construct(User $model_motorist) {
+        $this->repo_motorist = $model_motorist;
     }
 
 
-    public function setCreateTaxi(array $date): Taxi {
+    public function setCreateMotorist(array $date): User {
 
         $hash = $this->generateHash();
         $qr_code = $this->generateQrCode($hash);
 
-        $taxi = $this->repo_taxi::create([
+        $motorist = $this->repo_motorist::create([
             'name' => $date['name'],
             'email' => $date['email'],
             'phone' => $date['phone'],
@@ -39,10 +39,11 @@ class TaxiRepository {
             'hash' => $hash,
             'qr_code' => $qr_code,
             'status' => 1,
-            'accept_lgpd' => 1
+            'accept_lgpd' => 1,
+            'administrator' => 0
         ]);
 
-       $car = $taxi->car()->create([
+       $car = $motorist->car()->create([
             'car_plate' => $date['car_plate'],
             'car_renamed' => $date['car_renamed'],
             'model' => $date['model'],
@@ -50,7 +51,7 @@ class TaxiRepository {
             'color' => $date['color']
        ]);
 
-       $place = $taxi->place()->create([
+       $place = $motorist->place()->create([
             'zipcode' => $date['zipcode'],
             'address' => $date['address'],
             'address_number' => isset($date['address_number']) ? $date['address_number'] : null,
@@ -61,10 +62,10 @@ class TaxiRepository {
        ]);
 
 
-        if($taxi && $car && $place) {
+        if($motorist && $car && $place) {
 
-            JobSendMailWelcome::dispatch($taxi)->delay(now()->addSeconds('30'));
-            return $taxi;
+            JobSendMailWelcome::dispatch($motorist)->delay(now()->addSeconds('30'));
+            return $motorist;
         }
 
         return false;
@@ -72,7 +73,7 @@ class TaxiRepository {
 
     private function generateHash() {
 
-        $count_taxi = $this->repo_taxi::whereDate('created_at', Carbon::now()->format('Y-m-d'))->count();
+        $count_taxi = $this->repo_motorist::whereDate('created_at', Carbon::now()->format('Y-m-d'))->count();
         $date = Carbon::now()->format('d');
         $number_hash =  str_pad(($count_taxi + 1) , 4 , '0' , STR_PAD_LEFT);
         return $date.$number_hash;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TaxiPlace extends Model
+class UserPlace extends Model
 {
     use HasFactory, Notifiable, UuidTrait;
 
@@ -16,13 +16,13 @@ class TaxiPlace extends Model
 
     protected $keyType = 'uuid';
 
-    protected $table = 'taxi_places';
+    protected $table = 'user_places';
 
     protected $fillable = [
-        'id_taxi', 'zipcode', 'address', 'address_number', 'neighborhood', 'complement', 'state', 'city'
+        'user_id', 'zipcode', 'address', 'address_number', 'neighborhood', 'complement', 'state', 'city'
     ];
 
-    public function taxi(){
-        return $this->belongsTo(Taxi::class);
+    public function motorist(){
+        return $this->belongsTo(User::class);
     }
 }

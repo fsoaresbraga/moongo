@@ -14,7 +14,7 @@ class CreateCategoryMovementsTable extends Migration
     public function up()
     {
         Schema::create('category_movements', function (Blueprint $table) {
-            $table->uuid('id')->primary();           
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->enum('status', ['1', '0'])->default('1');
             $table->timestamps();

@@ -91,4 +91,15 @@ class MovementController extends Controller
 
         return back()->with(config('messages.errorUpdateMovement'))->withInput();
     }
+
+    public function delete($id) {
+
+        $movement = $this->repo_movement->deleteMovement($id);
+
+        if($movement) {
+            return response()->json(['type' => 'success']);
+        }
+        return response()->json(['type' => 'error']);
+
+    }
 }

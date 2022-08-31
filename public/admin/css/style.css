@@ -9763,7 +9763,7 @@ textarea.is-invalid.tt-hint {
     color: #ffffff; }
   .btn-check:focus + .btn, .fc .btn-check:focus + button, .ajax-upload-dragdrop .btn-check:focus + .ajax-file-upload, .swal2-modal .swal2-buttonswrapper .btn-check:focus + .swal2-styled, .btn:focus, .fc button:focus, .ajax-upload-dragdrop .ajax-file-upload:focus, .swal2-modal .swal2-buttonswrapper .swal2-styled:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); border: 1px solid;}
   .btn:disabled, .fc button:disabled, .ajax-upload-dragdrop .ajax-file-upload:disabled, .swal2-modal .swal2-buttonswrapper .swal2-styled:disabled, .btn.disabled, .fc button.disabled, .ajax-upload-dragdrop .disabled.ajax-file-upload, .swal2-modal .swal2-buttonswrapper .disabled.swal2-styled,
   fieldset:disabled .btn,
   fieldset:disabled .fc button,
@@ -19922,19 +19922,7 @@ div.tagsinput {
 /* === Landing screens === */
 /* Auth */
 .auth.login-bg {
-  background: url("../images/auth/Login_bg.jpg");
-  background-size: cover; }
-
-.auth .login-half-bg {
-  background: url("../images/auth/login-bg.jpg");
-  background-size: cover; }
-
-.auth.register-half-bg {
-  background: url("../images/auth/Login_bg2.jpg");
-  background-size: cover; }
-
-.auth.lock-full-bg {
-  background: url("../images/auth/lockscreen-bg.jpg");
+  background: url("../assets/images/slider.png");
   background-size: cover; }
 
 .auth .lock-profile-img {
@@ -20890,3 +20878,8 @@ div.tagsinput {
 .dataTables_wrapper .dataTables_filter input {
   color: #fff;
 }
+button.swal2-confirm.btn.btn-success.order-2 {
+    position: relative;
+    margin: 0px 11px 0 0;
+}
+

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaxiPlacesTable extends Migration
+class CreateUserPlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTaxiPlacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('taxi_places', function (Blueprint $table) {
+        Schema::create('user_places', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('taxi_id')->nullable(false);
+            $table->uuid('user_id')->nullable(false);
             $table->integer('zipcode');
             $table->string('address');
             $table->string('address_number')->nullable();
@@ -34,6 +34,6 @@ class CreateTaxiPlacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taxi_places');
+        Schema::dropIfExists('user_places');
     }
 }

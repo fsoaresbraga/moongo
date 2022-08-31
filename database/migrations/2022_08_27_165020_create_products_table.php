@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->decimal('average_cost', 7,2)->nullable(true);
             $table->decimal('sale_price', 7,2)->nullable(true);
             $table->timestamps();
+            $table->uuid('user_delete')->nullable(true);
+            $table->softDeletes();
         });
     }
 

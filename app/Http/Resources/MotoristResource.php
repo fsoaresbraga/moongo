@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 
 use Carbon\Carbon;
-use App\Http\Resources\TaxiCarResource;
-use App\Http\Resources\TaxiPlaceResource;
+use App\Http\Resources\MotoristCarResource;
+use App\Http\Resources\MotoristPlaceResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TaxiResource extends JsonResource
+class MotoristResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -31,8 +31,8 @@ class TaxiResource extends JsonResource
             'qr_code' => $this->qr_code,
             'status' => $this->statusOptions[$this->status],
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y'),
-            'place' => new TaxiPlaceResource($this->place),
-            'car' => new TaxiCarResource($this->car),
+            'place' => new MotoristPlaceResource($this->place),
+            'car' => new MotoristCarResource($this->car),
 
         ];
     }

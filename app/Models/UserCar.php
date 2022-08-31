@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TaxiCar extends Model
+class UserCar extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, UuidTrait;
 
@@ -20,10 +20,10 @@ class TaxiCar extends Model
     protected $table = 'taxi_cars';
 
     protected $fillable = [
-        'id_taxi', 'car_plate', 'car_renamed', 'model', 'year', 'color'
+        'user_id', 'car_plate', 'car_renamed', 'model', 'year', 'color'
     ];
 
-    public function taxi(){
-        return $this->belongsTo(Taxi::class);
+    public function motorist(){
+        return $this->belongsTo(User::class);
     }
 }

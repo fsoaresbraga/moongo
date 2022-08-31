@@ -72,4 +72,17 @@ class ProductController extends Controller
 
         return back()->with(config('messages.errorUpdateProduct'))->withInput();
     }
+
+
+    public function delete($id) {
+
+        $product = $this->repo_product->deleteProduct($id);
+
+        if($product) {
+            return response()->json(['type' => 'success']);
+        }
+        return response()->json(['type' => 'error']);
+
+    }
+
 }

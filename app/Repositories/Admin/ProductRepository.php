@@ -3,13 +3,16 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Product;
+use App\Http\Controllers\Admin\FunctionsController;
 
 class ProductRepository {
 
     private $repo_product;
+    private $functions;
 
     public function __construct(Product $model_product) {
         $this->repo_product = $model_product;
+        $this->functions = new FunctionsController();
     }
 
     public function getProducts() {
@@ -21,15 +24,15 @@ class ProductRepository {
     }
 
     public function setStoreProduct(array $req) {
-        
+
         $product = $this->repo_product->create([
             'brand_id' => $req['brand'],
             'category_id' => $req['category'],
             'sku' => $req['sku'],
             'title' => $req['title'],
-            'cost' => isset($req['cost']) ? $this->convertDecimalValue($req['cost']) : null,
-            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->convertDecimalValue($req['last_purchase_cost']) : null,
-            'sale_price' => isset($req['sale_price']) ? $this->convertDecimalValue($req['sale_price']) : null
+            'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
+            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
+            'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
 
        ]);
 
@@ -59,9 +62,9 @@ class ProductRepository {
             'category_id' => $req['category'],
             'sku' => $req['sku'],
             'title' => $req['title'],
-            'cost' => isset($req['cost']) ? $this->convertDecimalValue($req['cost']) : null,
-            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->convertDecimalValue($req['last_purchase_cost']) : null,
-            'sale_price' => isset($req['sale_price']) ? $this->convertDecimalValue($req['sale_price']) : null
+            'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
+            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
+            'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
         ]);
 
         if($product) {
@@ -72,18 +75,20 @@ class ProductRepository {
 
     }
 
-    private function convertDecimalValue($money) {
+    public function deleteProduct($id) {
 
-        $cleanString = preg_replace('/([^0-9\.,])/i', '', $money);
-        $onlyNumbersString = preg_replace('/([^0-9])/i', '', $money);
+        $product = $this->repo_product->find($id);
 
-        $separatorsCountToBeErased = strlen($cleanString) - strlen($onlyNumbersString) - 1;
+        if($product) {
+            $product->update([
+                'user_delete' => auth()->user()->id
+            ]);
 
-        $stringWithCommaOrDot = preg_replace('/([,\.])/', '', $cleanString, $separatorsCountToBeErased);
-        $removedThousandSeparator = preg_replace('/(\.|,)(?=[0-9]{3,}$)/', '',  $stringWithCommaOrDot);
+            $product->delete();
+            return true;
+        }
 
-        return (float) str_replace(',', '.', $removedThousandSeparator);
+        return false;
     }
-
 
 }

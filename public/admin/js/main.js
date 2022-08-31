@@ -10,7 +10,7 @@ $( document ).ready(function() {
 
 
 
-    var table = $('#footer-search').DataTable({
+    var product = $('#footer-search').DataTable({
 
         initComplete: function () {
             // Apply the search
@@ -49,7 +49,7 @@ $( document ).ready(function() {
 
     });
 
-    table.on( 'draw', function () {
+    product.on( 'draw', function () {
         $('.paginate_button.previous').html("<button class='btn btn-out btn-warning btn-square'>Anterior</button>");
         $('.paginate_button.next').html("<button class='btn btn-out btn-warning btn-square'>Próximo</button>");
     } );
@@ -81,9 +81,10 @@ $( document ).ready(function() {
         },
 
         "columns": [
-            { "width": "30%" },
-            { "width": "10%" },
-            { "width": "10%" },
+            { "width": "23%" },
+            { "width": "13%" },
+            { "width": "7%" },
+            { "width": "7%" },
             { "width": "10%" },
             { "width": "10%" },
             { "width": "10%" },
@@ -100,4 +101,155 @@ $( document ).ready(function() {
     } );
 
 
+
+    deleteProduct = async(id) => {
+
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success order-2',
+                cancelButton: 'btn btn-danger order-3',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Deletar Produto?',
+            text: "Após essa ação será deleto o Produto!",
+            icon: 'warning',
+            background: '#191c24',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, deletar!',
+            cancelButtonText: 'Não, cancelar',
+            reverseButtons: true,
+
+        }).then(async (result) => {
+
+            if (result.isConfirmed) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "delete",
+                    dataType: "json",
+                    url: "/area_restrita/deletar/produto/" + id,
+                    data: {
+                        'id': id,
+                    },
+                    success: function(data) {
+
+                        if(data.type = 'success')
+                        {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Excluído',
+                                text: "Produto Excluído com Sucesso.",
+                                icon: 'success',
+                                background: '#191c24'
+                            })
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500);
+                        }
+                        else{
+                            swalWithBootstrapButtons.fire({
+                                title: 'Cancelado',
+                                text: "Produto não Encontrado.",
+                                icon: 'success',
+                                background: '#191c24'
+                            })
+                        }
+
+                    }
+                });
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: 'Cancelado!',
+                    text: "Produto não foi Deletado.",
+                    icon: 'success',
+                    background: '#191c24'
+                })
+            }
+
+        })
+    }
+
+    deleteMovement = async(id) => {
+
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success order-2',
+                cancelButton: 'btn btn-danger order-3',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Deletar Movimentaçao?',
+            text: "Após essa ação será deleta á Movimentaçao!",
+            icon: 'warning',
+            background: '#191c24',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, deletar!',
+            cancelButtonText: 'Não, cancelar',
+            reverseButtons: true,
+
+        }).then(async (result) => {
+
+            if (result.isConfirmed) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "delete",
+                    dataType: "json",
+                    url: "/area_restrita/deletar/movimentacao/" + id,
+                    data: {
+                        'id': id,
+                    },
+                    success: function(data) {
+
+                        if(data.type = 'success')
+                        {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Excluída',
+                                text: "Movimentaçao Excluída com Sucesso.",
+                                icon: 'success',
+                                background: '#191c24'
+                            })
+
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500);
+                        }
+                        else{
+                            swalWithBootstrapButtons.fire({
+                                title: 'Cancelada',
+                                text: "Movimentaçao não Encontrada.",
+                                icon: 'success',
+                                background: '#191c24'
+                            })
+                        }
+
+                    }
+                });
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: 'Cancelada!',
+                    text: "Movimentaçao não foi Deletada.",
+                    icon: 'success',
+                    background: '#191c24'
+                })
+            }
+
+        })
+    }
 });

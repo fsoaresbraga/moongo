@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Taxi;
+use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaxiRequest extends FormRequest
+class MotoristRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class TaxiRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Taxi $taxi)
+    public function rules(User $user)
     {
         $uuid = $this->id;
 
@@ -59,7 +59,7 @@ class TaxiRequest extends FormRequest
             ],
             'gender' => [
                 'required',
-                Rule::in(array_keys($taxi->genderOptions))
+                Rule::in(array_keys($user->genderOptions))
             ],
             'password' => [
                 'required',

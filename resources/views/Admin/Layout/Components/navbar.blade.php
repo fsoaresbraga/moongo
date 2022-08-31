@@ -8,9 +8,9 @@
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
         <span class="mdi mdi-menu"></span>
       </button>
-     
+
       <ul class="navbar-nav navbar-nav-right">
-       
+
         <li class="nav-item dropdown border-left">
           <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
             <i class="mdi mdi-bell"></i>
@@ -35,25 +35,16 @@
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
             <div class="navbar-profile">
-              <p class="mb-0 d-none d-sm-block navbar-profile-name">Felipe Soares</p>
+              <p class="mb-0 d-none d-sm-block navbar-profile-name">{{Auth::user()->name}}</p>
               <i class="mdi mdi-menu-down d-none d-sm-block"></i>
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
             <h6 class="p-3 mb-0">Perfil</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-settings text-success"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                <p class="preview-subject mb-1">Configurações</p>
-              </div>
-            </a>
+
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item">
+            <a href="{{route('admin.login.logout')}}" onclick="event.preventDefault();document.getElementById('logout-system').submit();" class="dropdown-item preview-item">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>
@@ -63,6 +54,10 @@
                 <p class="preview-subject mb-1">Sair</p>
               </div>
             </a>
+            <form id="logout-system" action="{{route('admin.login.logout')}}" method="POST"
+                style="display: none;">
+                {{ csrf_field() }}
+            </form>
           </div>
         </li>
       </ul>

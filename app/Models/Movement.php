@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Models\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Movement extends Model
 {
-    use HasFactory, Notifiable, UuidTrait;
+    use HasFactory, Notifiable, UuidTrait, SoftDeletes;
 
 
     public $incrementing = false;
@@ -26,8 +27,8 @@ class Movement extends Model
      * @var array
      */
     protected $fillable = [
-        'taxi_id', 'origin_id', 'destination_id', 'category_movement_id', 'type_movement_id',
-        'product_id', 'bar_code', 'quantity', 'expiration', 'cost'
+        'user_id', 'origin_id', 'destination_id', 'category_movement_id', 'type_movement_id',
+        'product_id', 'bar_code', 'quantity', 'expiration', 'cost', 'user_delete'
     ];
 
 
@@ -49,6 +50,10 @@ class Movement extends Model
 
     public function typeMovement() {
         return $this->belongsTo(TypeMovement::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }
 

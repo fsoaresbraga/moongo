@@ -23,6 +23,12 @@ return [
 
 
     //web SITE ADM
+    'errorLogin' => [
+        'type' => 'warning',
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Atenção!',
+        'message' => 'E-mail ou senha não encontrado.'
+    ],
     'verifyForm' => [
         'type' => 'warning',
         'icon' => 'fa-solid fa-circle-exclamation',

@@ -5,27 +5,30 @@ namespace App\Repositories\Admin;
 use Carbon\Carbon;
 use App\Models\Movement;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Admin\FunctionsController;
 
 class MovementRepository {
 
     private $repo_movement;
+    private $functions;
 
     public function __construct(Movement $model_movement) {
         $this->repo_movement = $model_movement;
+        $this->functions = new FunctionsController();
     }
 
     public function getMovements() {
-        return $this->repo_movement::with('product', 'origin', 'destination', 'categoryMovement', 'typeMovement' )
+        return $this->repo_movement::with('product', 'origin', 'destination', 'categoryMovement', 'typeMovement', 'user')
                                     ->orderBy('created_at', 'DESC')->get();
 
     }
 
     public function setStoreMovement(array $req) {
 
-        
+
         $movement = $this->repo_movement->create([
 
-            'taxi_id' => (String) Str::uuid(),
+            'user_id' => auth()->user()->id,
             'origin_id' => $req['origin'],
             'destination_id' => $req['destination'],
             'category_movement_id' => $req['category_movement'],
@@ -64,9 +67,9 @@ class MovementRepository {
             'category_id' => $req['category'],
             'sku' => $req['sku'],
             'title' => $req['title'],
-            'cost' => isset($req['cost']) ? $this->convertDecimalValue($req['cost']) : null,
-            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->convertDecimalValue($req['last_purchase_cost']) : null,
-            'sale_price' => isset($req['sale_price']) ? $this->convertDecimalValue($req['sale_price']) : null
+            'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
+            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
+            'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
         ]);
 
         if($product) {
@@ -76,18 +79,24 @@ class MovementRepository {
         return false;
 
     }
-    private function convertDecimalValue($money) {
 
-        $cleanString = preg_replace('/([^0-9\.,])/i', '', $money);
-        $onlyNumbersString = preg_replace('/([^0-9])/i', '', $money);
+    public function deleteMovement($id) {
 
-        $separatorsCountToBeErased = strlen($cleanString) - strlen($onlyNumbersString) - 1;
+        $movement = $this->repo_movement->find($id);
 
-        $stringWithCommaOrDot = preg_replace('/([,\.])/', '', $cleanString, $separatorsCountToBeErased);
-        $removedThousandSeparator = preg_replace('/(\.|,)(?=[0-9]{3,}$)/', '',  $stringWithCommaOrDot);
+        if($movement) {
+            $movement->update([
+                'user_delete' => auth()->user()->id
+            ]);
 
-        return (float) str_replace(',', '.', $removedThousandSeparator);
+            $movement->delete();
+            return true;
+        }
+
+        return false;
     }
+
+
 
 
 }

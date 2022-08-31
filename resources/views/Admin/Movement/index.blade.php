@@ -32,11 +32,13 @@
                         </div>
                     </div>
                 @else
+
                 <div class="dt-responsive table-responsive">
                     <table id="movement-search" class="table table-bordered nowrap">
                         <thead>
                             <tr>
                                 <th >Produto </th>
+                                <th class="nosort">Usuário </th>
                                 <th class="nosort">Código de Barras</th>
                                 <th >Origen</th>
                                 <th>Destino</th>
@@ -52,15 +54,17 @@
                             @foreach ($movements as $movement)
                                 <tr>
                                     <td>{{$movement->product->title}}</td>
+                                    <td>{{$movement->user->name}}</td>
                                     <td>{{$movement->bar_code}}</td>
                                     <td>{{($movement->origin->name)}}</td>
                                     <td>{{($movement->destination->name)}}</td>
                                     <td>{{($movement->categoryMovement->name)}}</td>
-                                    <td>{{($movement->typeMovement->name)}}</td>
+                                    <td style="font-weight: bold; color: {{($movement->typeMovement->name == "Entrada" ? '#27953d' : '#fc424a')}}">{{($movement->typeMovement->name)}}</td>
                                     <td>{{(date('d/m/Y', strtotime($movement->expiration)))}}</td>
                                     <td>0</td>
                                     <td>
-                                        <a href="{{route('admin.movement.show', $movement->id)}}" class="btn btn-outline-secondary btn-icon-text"> Editar <i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                        <a href="{{route('admin.movement.show', $movement->id)}}" class="btn btn-outline-secondary btn-icon-text"> <i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                        <a href="#" onclick="deleteMovement('{{$movement->id}}')" class="btn btn-outline-danger btn-icon-text"> <i class="mdi mdi mdi-delete btn-icon-append"></i></a>
                                     </td>
 
                                 </tr>
@@ -68,9 +72,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th >Produto </th>
+                                <th>Produto </th>
+                                <th class="nosort">Usuário </th>
                                 <th class="nosort">Código de Barras</th>
-                                <th >Origen</th>
+                                <th>Origen</th>
                                 <th>Destino</th>
                                 <th class="nosort">Categoria Movimentação</th>
                                 <th class="nosort">Tipo Movimentação</th>

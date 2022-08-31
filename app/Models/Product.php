@@ -6,11 +6,12 @@ use App\Models\ProductBrand;
 use App\Models\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory, Notifiable, UuidTrait;
+    use HasFactory, Notifiable, UuidTrait, SoftDeletes;
 
 
     public $incrementing = false;
@@ -28,7 +29,7 @@ class Product extends Model
      */
     protected $fillable = [
         'category_id', 'brand_id', 'sku', 'title', 'cost', 'last_purchase_cost', 'average_cost',
-         'sale_price'
+         'sale_price', 'user_delete'
     ];
 
 

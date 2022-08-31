@@ -58,7 +58,8 @@
                                         <td>R$ {{number_format($product->sale_price, 2, ',', '.')}}</td>
                                         <td>R$ {{number_format($product->last_purchase_cost, 2, ',', '.')}}</td>
                                         <td>
-                                            <a href="{{route('admin.product.show', $product->id)}}" class="btn btn-outline-secondary btn-icon-text"> Editar <i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                            <a href="{{route('admin.product.show', $product->id)}}" class="btn btn-outline-secondary btn-icon-text"> <i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                            <a href="#" onclick="deleteProduct('{{$product->id}}')" class="btn btn-outline-danger btn-icon-text"> <i class="mdi mdi mdi-delete btn-icon-append"></i></a>
                                         </td>
 
                                     </tr>
