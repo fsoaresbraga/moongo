@@ -37,14 +37,17 @@ $( document ).ready(function() {
         },
 
         "columns": [
-            { "width": "36%" },
+            { "width": "29%" },
             { "width": "10%" },
             { "width": "10%" },
             { "width": "10%" },
             { "width": "10%" },
             { "width": "10%" },
             { "width": "10%" },
-            { "width": "4%" }
+            { "width": "3%" },
+            { "width": "3%" },
+            { "width": "3%" },
+            { "width": "2%" },
         ]
 
     });
@@ -81,7 +84,7 @@ $( document ).ready(function() {
         },
 
         "columns": [
-            { "width": "23%" },
+            { "width": "20%" },
             { "width": "13%" },
             { "width": "7%" },
             { "width": "7%" },
@@ -90,6 +93,7 @@ $( document ).ready(function() {
             { "width": "10%" },
             { "width": "10%" },
             { "width": "6%" },
+            { "width": "3%" },
             { "width": "4%" }
         ]
 

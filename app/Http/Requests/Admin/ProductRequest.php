@@ -50,6 +50,7 @@ class ProductRequest extends FormRequest
             'last_purchase_cost' => [],
             'average_cost' => [],
             'sale_price' => [],
+            'status' => [],
         ];
 
         return $rules;

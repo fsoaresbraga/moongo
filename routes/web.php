@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\{
 use App\Http\Controllers\Admin\Auth\{
     LoginController
 };
+use App\Http\Controllers\Passenger\{
+    AppController
+};
 
 
 Route::group(['prefix'=>'area_restrita','as'=>'admin.'], function(){
@@ -48,11 +51,11 @@ Route::group(['prefix'=>'area_restrita','as'=>'admin.'], function(){
 Route::get('/', function() {
     return "WEB";
 });
-/*
-Route::get('/', [SiteController::class, 'home'])->name('home.site');
-Route::get('/{hash}', [SiteController::class, 'index'])->name('home');
-Route::get('/get/carrinho', [SiteController::class, 'addCart'])->name('cart.add');
-Route::get('/{hash}/carrinho', [SiteController::class, 'cartView'])->name('cart.view');
-Route::get('/{movement}/checkout', [SiteController::class, 'checkoutView'])->name('checkout.view');
-Route::post('/send/carrinho', [SiteController::class, 'storeCart'])->name('cart.store');
-*/
+
+//Route::get('/', [Passenger\AppController::class, 'home'])->name('home.site');
+Route::get('/{hash}', [AppController::class, 'index'])->name('home');
+Route::get('/get/carrinho', [AppController::class, 'addCart'])->name('cart.add');
+Route::get('/{hash}/carrinho', [AppController::class, 'cartView'])->name('cart.view');
+Route::get('/{movement}/checkout', [AppController::class, 'checkoutView'])->name('checkout.view');
+Route::post('/send/carrinho', [AppController::class, 'storeCart'])->name('cart.store');
+

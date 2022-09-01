@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Admin\FunctionsController;
 
 class ProductRepository {
@@ -16,7 +17,56 @@ class ProductRepository {
     }
 
     public function getProducts() {
-        return $this->repo_product::with('brand', 'category')->orderBy('title', 'ASC')->get();
+        //return $this->repo_product::with('brand', 'category')->orderBy('title', 'ASC')->get();
+
+        $products = DB::select("
+                        SELECT
+                        prod.id,
+                        prod.title,
+                        prod.sku,
+                        prod.cost,
+                        prod.sale_price,
+                        prod.last_purchase_cost,
+                        brand.name as brand,
+                        cat.name as category,
+
+                        SUM(IF(tp_mov.name='Entrada', mov.quantity, 0)) AS entry,
+
+                        SUM(IF(tp_mov.name='Saída', mov.quantity, 0)) AS way_out,
+
+                        SUM(IF(tp_mov.name='Entrada', mov.quantity, 0)) - SUM(IF(tp_mov.name='Saída', mov.quantity, 0)) as total
+
+
+                        FROM products as prod
+
+                            INNER JOIN product_brands as brand
+                            ON prod.brand_id = brand.id
+
+                            INNER JOIN product_categories as cat
+                            ON prod.category_id = cat.id
+
+                            INNER JOIN movements as mov
+                            ON prod.id = mov.product_id
+
+                            INNER JOIN origins as origin
+                            ON origin.id = mov.origin_id
+
+                            INNER JOIN destinations as destination
+                            ON destination.id = mov.destination_id
+
+                            INNER JOIN type_movements as tp_mov
+                            ON tp_mov.id = mov.type_movement_id
+
+                        WHERE
+
+                            ((origin.name = 'Compra' && destination.name = 'Estoque' && tp_mov.name = 'Entrada')
+                        OR
+                            (origin.name = 'Estoque' && destination.name = 'Carro' && tp_mov.name = 'Saída'))
+
+                        group by prod.id;
+                    ");
+
+        return $products;
     }
 
     public function getOnlyProducts() {
@@ -31,6 +81,7 @@ class ProductRepository {
             'sku' => $req['sku'],
             'title' => $req['title'],
             'image' => null,
+            'status' => 1,
             'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
             'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
             'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
@@ -64,6 +115,7 @@ class ProductRepository {
             'sku' => $req['sku'],
             'title' => $req['title'],
             'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
+            'status' => isset($req['status']) ? 1 : 0,
             'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
             'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
         ]);

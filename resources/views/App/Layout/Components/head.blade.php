@@ -6,7 +6,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
+
       gtag('config', 'G-TC2WGLMVM7');
     </script>
 
@@ -18,13 +18,10 @@
 
     <link rel="icon" href="{{asset('assets/img/favicon.png')}}">
 
-    @include('Layout.Components.styles')
+    @include('App.Layout.Components.styles')
     <link href="{{asset('assets/font/css2.css')}}" rel="stylesheet">
-    @php 
-    /*<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">*/
-     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0');
-    @endphp
-    
-   
+
+
+
 </head>
 <!-- Google tag (gtag.js) -->

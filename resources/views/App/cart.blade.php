@@ -1,4 +1,4 @@
-@extends('Layout.app')
+@extends('App.Layout.app')
 @section('content')
     <!-- preloader area start -->
 <div class="container">

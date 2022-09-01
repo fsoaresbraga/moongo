@@ -95,7 +95,12 @@
                             <input type="text" name="sale_price" class="form-control money" id="edit-sale_price" placeholder="Preço Venda" value="{{$product->sale_price}}">
                         </div>
                     </div>
-
+                    <div class="col-md-12 form-group">
+                        <div class="form-check form-check-warning">
+                            <label class="form-check-label">
+                            <input type="checkbox" name="status" value="1"class="form-check-input" {{$product->status ? "checked" : ""}}> Produto Ativo? <i class="input-helper"></i></label>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <button type="submit" class="btn btn-inverse-success btn-fw btn-lg">Editar Produto</button>

@@ -17,9 +17,9 @@ addToCart = (idProduct, idUser) => {
 
     event.preventDefault();
 
-    $(`#btn_prod_${idProduct}`).removeClass("btn-base");
-    $(`#btn_prod_${idProduct}`).addClass("btn-success-cart");
-    $(`#btn_prod_${idProduct}`).attr("disabled","disabled");
+    //$(`#btn_prod_${idProduct}`).removeClass("btn-base");
+    //$(`#btn_prod_${idProduct}`).addClass("btn-success-cart");
+    //$(`#btn_prod_${idProduct}`).attr("disabled","disabled");
 
 
 
@@ -46,14 +46,13 @@ addToCart = (idProduct, idUser) => {
             method: 'get',
             data: {product: idProduct, user: idUser},
             success: function(result){
-                //console.log(result);
 
                 Object.assign(result.data, {'qtd': 1});
                 let itens = JSON.parse(localStorage.getItem('products'));
 
 
                 if(itens !== null && result.type == 'success'){
-                    
+
                     itens.push(result.data);
                     localStorage.setItem('products', JSON.stringify(itens));
                     totalQtdCart();

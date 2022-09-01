@@ -43,6 +43,9 @@
                                     <th class="nosort">Custo</th>
                                     <th class="nosort">Preço Venda</th>
                                     <th class="nosort">Custo Última Compra</th>
+                                    <th class="nosort">Qtd. Entrada</th>
+                                    <th class="nosort">Qtd. Saída</th>
+                                    <th class="nosort" >Estoque</th>
                                     <th class="nosort">Opção</th>
                                 </tr>
                             </thead>
@@ -52,14 +55,19 @@
                                     <tr>
                                         <td>{{$product->title}}</td>
                                         <td>{{$product->sku}}</td>
-                                        <td>{{($product->brand->name)}}</td>
-                                        <td>{{$product->category->name}}</td>
+                                        <td>{{($product->brand)}}</td>
+                                        <td>{{$product->category}}</td>
                                         <td>R$ {{number_format($product->cost, 2, ',', '.')}}</td>
                                         <td>R$ {{number_format($product->sale_price, 2, ',', '.')}}</td>
                                         <td>R$ {{number_format($product->last_purchase_cost, 2, ',', '.')}}</td>
+                                        <td>{{$product->entry}}</td>
+                                        <td>{{$product->way_out}}</td>
+                                        <td style="font-weight: bold; color: {{($product->total > "10" ? '#27953d' : '#fc424a')}}">{{$product->total}}</td>
                                         <td>
                                             <a href="{{route('admin.product.show', $product->id)}}" class="btn btn-outline-secondary btn-icon-text"> <i class="mdi mdi-file-check btn-icon-append"></i></a>
-                                            <a href="#" onclick="deleteProduct('{{$product->id}}')" class="btn btn-outline-danger btn-icon-text"> <i class="mdi mdi mdi-delete btn-icon-append"></i></a>
+                                            @php
+                                             /*<a href="#" onclick="deleteProduct('{{$product->id}}')" class="btn btn-outline-danger btn-icon-text"> <i class="mdi mdi mdi-delete btn-icon-append"></i></a>*/
+                                            @endphp
                                         </td>
 
                                     </tr>
@@ -74,6 +82,9 @@
                                     <th>Custo</th>
                                     <th>Preço Venda</th>
                                     <th>Custo Última Compra</th>
+                                    <th class="nosort">Qtd. Entrada</th>
+                                    <th class="nosort">Qtd. Saída</th>
+                                    <th class="nosort">Estoque</th>
                                     <th>Opção</th>
                                 </tr>
                             </tfoot>

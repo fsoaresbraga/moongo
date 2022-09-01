@@ -36,7 +36,7 @@ class MovementRepository {
             'product_id' => $req['product'],
             'bar_code' => $req['bar_code'],
             'quantity' => $req['quantity'],
-            'expiration' => Carbon::parse($req['date_expiration'])->format('Y-m-d'),
+            'expiration' => isset($req['date_expiration']) ? Carbon::parse($req['date_expiration'])->format('Y-m-d') : null,
             'cost'=> 0
        ]);
 
@@ -61,13 +61,16 @@ class MovementRepository {
     public function setUpdateMovement($id, $req) {
 
         $movement = $this->repo_movement->find($id)->update([
-            'brand_id' => $req['brand'],
-            'category_id' => $req['category'],
-            'sku' => $req['sku'],
-            'title' => $req['title'],
-            'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
-            'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
-            'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
+            'user_id' => auth()->user()->id,
+            'origin_id' => $req['origin'],
+            'destination_id' => $req['destination'],
+            'category_movement_id' => $req['category_movement'],
+            'type_movement_id' => $req['type_movement'],
+            'product_id' => $req['product'],
+            'bar_code' => $req['bar_code'],
+            'quantity' => $req['quantity'],
+            'expiration' => isset($req['date_expiration']) ? Carbon::parse($req['date_expiration'])->format('Y-m-d') : null,
+            'cost'=> 0
         ]);
 
         if($movement) {

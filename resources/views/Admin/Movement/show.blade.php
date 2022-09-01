@@ -23,82 +23,126 @@
       <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <form action="{{route('admin.movement.edit', $product->id)}}" method="POST" class="forms-sample">
+            <form action="{{route('admin.movement.edit', $movement->id)}}" method="POST" class="forms-sample">
                 @csrf
                 <div class="row">
 
                     <div class="col-md-6">
-                        <div class="form-group @if($errors->has('brand')) is-invalid  @endif">
+                        <div class="form-group @if($errors->has('origin')) is-invalid  @endif">
 
-                            <label>Marca</label>
-                            <select class="js-example-basic-single form-control"  name="brand">
-                                <option value="#" disabled selected>informe uma Marca</option>
-                                @foreach($brands as $brand)
-                                    <option value="{{$brand->id}}" {{$brand->id == $product->brand_id ? "selected" : ""}}>{{$brand->name}}</option>
+                            <label>Origem</label>
+                            <select class="js-example-basic-single form-control @if($errors->has('origin')) is-invalid  @endif"  name="origin">
+                                <option value="#" disabled selected>informe uma Origem</option>
+                                @foreach($origins as $origin)
+                                    <option value="{{$origin->id}}" {{$origin->id == $movement->origin_id ? "selected": ""}}>{{$origin->name}}</option>
                                 @endforeach
                             </select>
-                            @if($errors->has('brand'))
-                                <div class="invalid-feedback">{{ $errors->first('brand') }}</div>
+                            @if($errors->has('origin'))
+                                <div class="invalid-feedback">{{ $errors->first('origin') }}</div>
                             @endif
                         </div>
                     </div>
+
                     <div class="col-md-6">
-                        <div class="form-group @if($errors->has('brand')) is-invalid  @endif">
-                            <label>Categoria</label>
-                            <select class="js-example-basic-single form-control"  name="category">
-                                <option value="#" disabled selected>informe uma Categoria</option>
+                        <div class="form-group @if($errors->has('destination')) is-invalid  @endif">
+                            <label>Destino</label>
+                            <select class="js-example-basic-single form-control @if($errors->has('destination')) is-invalid  @endif"  name="destination">
+                                <option value="#" disabled selected>informe um Destino</option>
+                                @foreach($destinations as $destination)
+                                    <option value="{{$destination->id}}"  {{$destination->id == $movement->destination_id ? "selected": ""}}>{{$destination->name}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('destination'))
+                                <div class="invalid-feedback">{{ $errors->first('destination') }}</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group @if($errors->has('category_movement')) is-invalid  @endif">
+                            <label>Categoria Movimentação</label>
+                            <select class="js-example-basic-single form-control @if($errors->has('category_movement')) is-invalid  @endif"  name="category_movement">
+                                <option value="#" disabled selected>informe uma Categoria de Movimentação</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}" {{$category->id == $product->category_id ? "selected" : ""}}>{{$category->name}}</option>
+                                    <option value="{{$category->id}}" {{$category->id == $movement->category_movement_id ? "selected": ""}}>{{$category->name}}</option>
                                 @endforeach
                             </select>
-                            @if($errors->has('category'))
-                                <div class="invalid-feedback">{{ $errors->first('category') }}</div>
+                            @if($errors->has('category_movement'))
+                                <div class="invalid-feedback">{{ $errors->first('category_movement') }}</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group @if($errors->has('type_movement')) is-invalid  @endif">
+                            <label>Tipo Movimentação</label>
+                            <select class="js-example-basic-single form-control @if($errors->has('type_movement')) is-invalid  @endif"  name="type_movement">
+                                <option value="#" disabled selected>informe um Tipo de Movimentação</option>
+                                @foreach($types as $type)
+                                    <option value="{{$type->id}}" {{$type->id == $movement->type_movement_id ? "selected": ""}}>{{$type->name}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('type_movement'))
+                                <div class="invalid-feedback">{{ $errors->first('type_movement') }}</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group @if($errors->has('product')) is-invalid  @endif">
+                            <label>Produto</label>
+                            <select class="js-example-basic-single form-control @if($errors->has('product')) is-invalid  @endif"  name="product">
+                                <option value="#" disabled selected>informe um Produto</option>
+                                @foreach($products as $product)
+                                    <option value="{{$product->id}}" {{$product->id == $movement->product_id ? "selected": ""}}>{{$product->title}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('product'))
+                                <div class="invalid-feedback">{{ $errors->first('product') }}</div>
                             @endif
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="edit-sku">SKU</label>
-                            <input type="text" name="sku" class="form-control @if($errors->has('sku')) is-invalid  @endif" id="edit-sku" placeholder="SKU" value="{{$product->sku}}">
-                            @if($errors->has('sku'))
-                                <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
+                            <label for="bar_code_edit">Código de Barras</label>
+                            <input type="text" name="bar_code" class="form-control @if($errors->has('bar_code')) is-invalid  @endif" id="bar_code_edit" placeholder="Código de Barras" value="{{$movement->bar_code}}">
+                            @if($errors->has('bar_code'))
+                                <div class="invalid-feedback">{{ $errors->first('bar_code') }}</div>
                             @endif
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="edit-title">Título </label>
-                            <input type="text" name="title" class="form-control @if($errors->has('title')) is-invalid  @endif" id="dit-title" placeholder="Título" value="{{$product->title}}">
-                            @if($errors->has('title'))
-                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
+                            <label for="quantity">Quantidade</label>
+                            <input type="number" name="quantity" class="form-control @if($errors->has('quantity')) is-invalid  @endif" id="quantity_edit" placeholder="Quantidade" value="{{$movement->quantity}}">
+                            @if($errors->has('quantity'))
+                                <div class="invalid-feedback">{{ $errors->first('quantity') }}</div>
                             @endif
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="edit-cost">Custo</label>
-                            <input type="text" name="cost" class="form-control money" id="edit-cost" placeholder="Custo" value="{{$product->cost}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="edit-last_purchase_cost">Custo Última Compra</label>
-                            <input type="text" name="last_purchase_cost" class="form-control money" id="edit-last_purchase_cost" placeholder="Custo Última Compra" value="{{$product->last_purchase_cost}}">
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="edit-sale_price">Preço Venda</label>
-                            <input type="text" name="sale_price" class="form-control money" id="edit-sale_price" placeholder="Preço Venda" value="{{$product->sale_price}}">
+                            <label for="date_expiration_edit">Data de Vencimento</label>
+                            <input type="text" name="date_expiration" class="form-control date @if($errors->has('date_expiration')) is-invalid  @endif" id="date_expiration_edit" placeholder="Data de Vencimento" value="{{date('d/m/Y', strtotime($movement->expiration))}}">
+                            @if($errors->has('date_expiration'))
+                                <div class="invalid-feedback">{{ $errors->first('date_expiration') }}</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cost_edit">Custo</label>
+                            <input type="text" name="cost" class="form-control money" id="cost_edit" placeholder="Custo" value="{{$movement->cost}}">
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-inverse-success btn-fw btn-lg">Editar Produto</button>
+                            <button type="submit" class="btn btn-inverse-success btn-fw btn-lg">Editar Movimentação</button>
                         </div>
                     </div>
                 </div>

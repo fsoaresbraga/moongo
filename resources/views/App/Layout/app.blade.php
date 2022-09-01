@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
-    @include('Layout.Components.head')
+<html lang="pt_Br">
+    @include('App.Layout.Components.head')
 <body class='sc5'>
 
     <!-- preloader area start -->
@@ -18,6 +18,6 @@
     @yield('content')
 
 
-    @include('Layout.Components.scripts')
+    @include('App.Layout.Components.scripts')
 </body>
 </html>

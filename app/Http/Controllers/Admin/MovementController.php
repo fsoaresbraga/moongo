@@ -56,11 +56,19 @@ class MovementController extends Controller
     public function show($id) {
 
         $movement = $this->repo_movement->getMovementById($id);
-        $categories = $this->repo_category->getCategories();
-        $brands = $this->repo_brand->getBrands();
+        $origins = $this->repo_origin->getOrigin();
+        $destinations = $this->repo_destination->getDestination();
+        $categories = $this->repo_category_movement->getCategoryMovement();
+        $types = $this->repo_type_movement->getTypeMovement();
+        $products = $this->repo_product->getOnlyProducts();
 
         if(gettype($movement) != 'boolean') {
-            return view('Admin.Movement.show', compact('product', 'categories', 'brands'));
+            return view('Admin.Movement.show',
+                compact(
+                    'movement', 'origins', 'destinations',
+                    'categories', 'types', 'products'
+                )
+            );
         }
 
         return redirect()->route('admin.product.index')->with(config('messages.movementNotFound'));
