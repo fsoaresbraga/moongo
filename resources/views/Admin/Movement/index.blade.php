@@ -38,13 +38,14 @@
                         <thead>
                             <tr>
                                 <th >Produto </th>
-                                <th class="nosort">Usuário </th>
-                                <th class="nosort">Código de Barras</th>
+                                <th class="nosort">Usu. Mov</th>
+                                <th class="nosort">Cód. de Barras</th>
                                 <th >Origen</th>
                                 <th>Destino</th>
-                                <th class="nosort">Categoria Movimentação</th>
-                                <th class="nosort">Tipo Movimentação</th>
-                                <th class="nosort">Data de Validade</th>
+                                <th class="nosort">Cat. Mov</th>
+                                <th class="nosort">Tipo Mov</th>
+                                <th class="nosort">Validade</th>
+                                <th class="nosort">Qtd</th>
                                 <th class="nosort">Custo</th>
                                 <th class="nosort">Opção</th>
                             </tr>
@@ -61,6 +62,7 @@
                                     <td>{{($movement->categoryMovement->name)}}</td>
                                     <td style="font-weight: bold; color: {{($movement->typeMovement->name == "Entrada" ? '#27953d' : '#fc424a')}}">{{($movement->typeMovement->name)}}</td>
                                     <td>{{(date('d/m/Y', strtotime($movement->expiration)))}}</td>
+                                    <td>{{$movement->quantity}}</td>
                                     <td>0</td>
                                     <td>
                                         <a href="{{route('admin.movement.show', $movement->id)}}" class="btn btn-outline-secondary btn-icon-text"> <i class="mdi mdi-file-check btn-icon-append"></i></a>
@@ -73,13 +75,14 @@
                         <tfoot>
                             <tr>
                                 <th>Produto </th>
-                                <th class="nosort">Usuário </th>
-                                <th class="nosort">Código de Barras</th>
+                                <th class="nosort">Usu. Mov</th>
+                                <th class="nosort">Cód. de Barras</th>
                                 <th>Origen</th>
                                 <th>Destino</th>
-                                <th class="nosort">Categoria Movimentação</th>
-                                <th class="nosort">Tipo Movimentação</th>
-                                <th class="nosort">Data de Validade</th>
+                                <th class="nosort">Cat. Mov</th>
+                                <th class="nosort">Tipo Mov</th>
+                                <th class="nosort">Validade</th>
+                                <th class="nosort">Qtd</th>
                                 <th class="nosort">Custo</th>
                                 <th class="nosort">Opção</th>
                             </tr>

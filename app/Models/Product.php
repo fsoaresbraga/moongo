@@ -29,7 +29,7 @@ class Product extends Model
      */
     protected $fillable = [
         'category_id', 'brand_id', 'sku', 'title', 'cost', 'last_purchase_cost', 'average_cost',
-         'sale_price', 'user_delete'
+         'sale_price', 'user_delete', 'image'
     ];
 
 

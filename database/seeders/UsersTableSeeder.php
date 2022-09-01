@@ -31,6 +31,22 @@ class UsersTableSeeder extends Seeder
             'administrator' => 1
         ]);
 
+        User::create([
+            'name'      => 'Daniel Wallace',
+            'email'     => 'daniel@gmail.com',
+            'cpf'     => '43677183872',
+            'phone'     => '16992694025',
+            'date_birth'     => '1998-07-07',
+            'gender'     => 'mas',
+            'password'  => bcrypt('147258'),
+            'image'  => null,
+            'hash'  => null,
+            'qr_code'  => null,
+            'status'  => 1,
+            'accept_lgpd'  => 1,
+            'administrator' => 0
+        ]);
+
 
     }
 }

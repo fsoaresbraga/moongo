@@ -57,11 +57,11 @@ class MovementController extends Controller
 
     public function show($id) {
 
-        $product = $this->repo_movement->getProductById($id);
+        $movement = $this->repo_movement->getMovementById($id);
         $categories = $this->repo_category->getCategories();
         $brands = $this->repo_brand->getBrands();
 
-        if(gettype($product) != 'boolean') {
+        if(gettype($movement) != 'boolean') {
             return view('Admin.Product.show', compact('product', 'categories', 'brands'));
         }
 

@@ -30,6 +30,7 @@ class ProductRepository {
             'category_id' => $req['category'],
             'sku' => $req['sku'],
             'title' => $req['title'],
+            'image' => null,
             'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
             'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
             'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
