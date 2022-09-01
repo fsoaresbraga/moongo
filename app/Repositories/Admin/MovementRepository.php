@@ -48,21 +48,19 @@ class MovementRepository {
 
     public function getMovementById($id) {
 
-        $product = $this->repo_movement->find($id);
+        $movement = $this->repo_movement->find($id);
 
-        if(isset($product)) {
+        if(isset($movement)) {
 
-            return $product;
+            return $movement;
         }
 
         return false;
     }
 
+    public function setUpdateMovement($id, $req) {
 
-
-    public function setUpdateProduct($id, $req) {
-
-        $product = $this->repo_movement->find($id)->update([
+        $movement = $this->repo_movement->find($id)->update([
             'brand_id' => $req['brand'],
             'category_id' => $req['category'],
             'sku' => $req['sku'],
@@ -72,7 +70,8 @@ class MovementRepository {
             'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
         ]);
 
-        if($product) {
+        if($movement) {
+
             return true;
         }
 

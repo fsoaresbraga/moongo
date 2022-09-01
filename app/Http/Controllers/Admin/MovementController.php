@@ -39,8 +39,6 @@ class MovementController extends Controller
     public function index() {
         $movements = $this->repo_movement->getMovements();
 
-        //dd($movements);
-
         return view('Admin.Movement.index', compact('movements'));
     }
 
@@ -62,7 +60,7 @@ class MovementController extends Controller
         $brands = $this->repo_brand->getBrands();
 
         if(gettype($movement) != 'boolean') {
-            return view('Admin.Product.show', compact('product', 'categories', 'brands'));
+            return view('Admin.Movement.show', compact('product', 'categories', 'brands'));
         }
 
         return redirect()->route('admin.product.index')->with(config('messages.movementNotFound'));
@@ -83,10 +81,10 @@ class MovementController extends Controller
 
     public function update($id, MovementRequest $request) {
 
-        $product = $this->repo_movement->setUpdateProduct($id, $request->validated());
+        $movement = $this->repo_movement->setUpdateMovement($id, $request->validated());
 
-        if($product) {
-            return redirect()->route('admin.product.index')->with(config('messages.successUpdateMovement'));
+        if($movement) {
+            return redirect()->route('admin.movement.index')->with(config('messages.successUpdateMovement'));
         }
 
         return back()->with(config('messages.errorUpdateMovement'))->withInput();
