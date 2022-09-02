@@ -12,7 +12,11 @@ use App\Http\Controllers\Passenger\{
     AppController
 };
 
+use App\Http\Controllers\LandingPage\{
+    SiteController
+};
 
+/*ADM -> ADM MOONGO*/
 Route::group(['prefix'=>'area_restrita','as'=>'admin.'], function(){
 
     Route::get('/', [LoginController::class, 'index'])->name('login.index');
@@ -46,16 +50,21 @@ Route::group(['prefix'=>'area_restrita','as'=>'admin.'], function(){
     });
 
 });
+/*ADM -> ADM MOONGO*/
 
 
-Route::get('/', function() {
-    return "WEB";
-});
-
-//Route::get('/', [Passenger\AppController::class, 'home'])->name('home.site');
+/*PASSAGER -> APP PASSAGEIRO*/
 Route::get('/{hash}', [AppController::class, 'index'])->name('home');
 Route::get('/get/carrinho', [AppController::class, 'addCart'])->name('cart.add');
 Route::get('/{hash}/carrinho', [AppController::class, 'cartView'])->name('cart.view');
 Route::get('/{movement}/checkout', [AppController::class, 'checkoutView'])->name('checkout.view');
 Route::post('/send/carrinho', [AppController::class, 'storeCart'])->name('cart.store');
+/*PASSAGER -> APP PASSAGEIRO*/
 
+
+/*LAANDINPAGE -> SITE APRESENTAÇÃO MOONGO*/
+Route::get('/', function() {
+    return view('LandingPage.desktop');
+ });
+Route::post('/send/contact', [SiteController::class, 'sendContatct'])->name('send.contact');
+/*LAANDINPAGE -> SITE APRESENTAÇÃO MOONGO*/

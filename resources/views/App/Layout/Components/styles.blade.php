@@ -12,7 +12,7 @@
 */
 @endphp
 
-<link rel="stylesheet" href="{{asset('mobile/css/core.css')}}">
+<link rel="stylesheet" href="{{asset('passenger/css/core.css')}}">
 
 
 

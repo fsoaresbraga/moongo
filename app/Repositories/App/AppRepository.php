@@ -74,6 +74,54 @@ class AppRepository {
 
     }
 
+    public function getProductById($req) {
+        
+        $user_id = $req['user'];
+        $product_id = $req['product'];
+
+       
+        $product =
+            collect(DB::select("
+                SELECT
+                prod.id as id,
+                prod.title as title,
+                prod.sale_price as price,
+                prod.image as image,
+                mov.bar_code,
+                SUM(IF(tp_mov.name='Entrada', mov.quantity, 0)) - SUM(IF(tp_mov.name='Saída', mov.quantity, 0)) as quantity
+
+                FROM products as prod
+
+                    INNER JOIN movements as mov
+                    ON prod.id = mov.product_id
+
+                    INNER JOIN origins as origin
+                    ON origin.id = mov.origin_id
+
+                    INNER JOIN destinations as destination
+                    ON destination.id = mov.destination_id
+
+                    INNER JOIN type_movements as tp_mov
+                    ON tp_mov.id = mov.type_movement_id
+
+                    INNER JOIN users as user
+                    ON user.id = mov.user_id
+
+                WHERE
+                    user.id = '".$user_id."'
+                AND
+                    prod.id = '".$product_id."'
+                AND
+                    ((origin.name = 'Carro' && destination.name = 'Estoque' && tp_mov.name = 'Entrada')
+                OR
+                    (origin.name = 'Carro' && destination.name = 'Venda' && tp_mov.name = 'Saída'))
+                group by prod.id;
+            "))->first();
+
+        return$product;
+
+    }
+
     public function getProductsVerifyStock($user_id) {
             $products =
                 DB::select("

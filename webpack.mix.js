@@ -12,32 +12,58 @@ const mix = require('laravel-mix');
  */
 
  mix.scripts([
-    'resources/js/jquery.3.6.min.js',
-    'resources/js/bootstrap.min.js',
-    'resources/js/jquery-ui.min.js',
-    'resources/js/sweetalert2.all.js',
-    'resources/js/cliplab.min.js',
-    'resources/js/functions.js',
-    'resources/js/main.js',
-    'resources/js/products.js',
-    'resources/js/cart.js',
-    'resources/js/checkout.js',
-], 'public/mobile/js/core.js').version();
+    'resources/passenger/js/jquery.3.6.min.js',
+    'resources/passenger/js/bootstrap.min.js',
+    'resources/passenger/js/jquery-ui.min.js',
+    'resources/passenger/js/sweetalert2.all.js',
+    'resources/passenger/js/cliplab.min.js',
+    'resources/passenger/js/functions.js',
+    'resources/passenger/js/main.js',
+    'resources/passenger/js/products.js',
+    'resources/passenger/js/cart.js',
+    'resources/passenger/js/checkout.js',
+], 'public/passenger/js/core.js').version();
 
 mix.styles([
-    'resources/css/bootstrap.min.css',
-    'resources/css/magnific.min.css',
-    'resources/css/jquery-ui.min.css',
-    'resources/css/fontawesome.min.css',
-    'resources/css/sweetalert2.css',
-    'resources/css/responsive.css',
-    'resources/css/style.css',
+    'resources/passenger/css/bootstrap.min.css',
+    'resources/passenger/css/magnific.min.css',
+    'resources/passenger/css/jquery-ui.min.css',
+    'resources/passenger/css/fontawesome.min.css',
+    'resources/passenger/css/sweetalert2.css',
+    'resources/passenger/css/responsive.css',
+    'resources/passenger/css/style.css',
 
-], 'public/mobile/css/core.css').version();
+], 'public/passenger/css/core.css').version();
 
-mix.copyDirectory(['resources/css/webfonts/'],
-    'public/mobile/webfonts/');
+mix.copyDirectory(['resources/passenger/css/webfonts/'],
+    'public/passenger/webfonts/');
 
 
+
+mix.scripts([
+    'resources/landingPage/js/jquery-2.2.4.js',
+    'resources/landingPage/js/bootstrap.bundle.js',
+    'resources/landingPage/js/aos.js',
+    'resources/landingPage/js/glightbox.js',
+    'resources/landingPage/js/jquery.mask.js',
+    'resources/landingPage/js/purecounter_vanilla.js',
+    'resources/landingPage/js/owl.carousel.js',
+    'resources/landingPage/js/sweetalert2.js',
+    'resources/landingPage/js/main.js',
+], 'public/landingPage/js/core.js').version();
+
+mix.styles([
+    'resources/landingPage/css/bootstrap.css',
+    'resources/landingPage/css/aos.css',
+    'resources/landingPage/css/boxicons.css',
+    'resources/landingPage/css/glightbox.css',
+    'resources/landingPage/css/owl.carousel.css',
+    'resources/landingPage/css/sweetalert2.css',
+    'resources/landingPage/css/style.css',
+
+], 'public/landingPage/css/core.css').version();
+
+mix.copyDirectory(['resources/landingPage/fonts/'],
+    'public/landingPage/fonts/');
 
  

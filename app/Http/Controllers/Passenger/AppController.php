@@ -41,7 +41,7 @@ class AppController extends Controller
             $response = $this->repo_app->getProductById($request->all());
 
 
-             if($response) {
+            if($response) {
                  $data = [
                      'id' => $response->id,
                      'title' => $response->title,
@@ -52,7 +52,7 @@ class AppController extends Controller
 
                  ];
                  return response()->json(['type' => 'success', 'data' => $data]);
-             }
+            }
 
              return abort('404');
 

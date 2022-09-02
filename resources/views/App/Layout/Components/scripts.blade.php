@@ -14,4 +14,4 @@
 */
 @endphp
 
-<script src="{{asset('mobile/js/core.js')}}"></script>
+<script src="{{asset('passenger/js/core.js')}}"></script>
