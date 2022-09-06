@@ -84,17 +84,15 @@ $( document ).ready(function() {
         },
 
         "columns": [
-            { "width": "20%" },
             { "width": "13%" },
+            { "width": "20%" },
             { "width": "7%" },
             { "width": "7%" },
             { "width": "10%" },
             { "width": "10%" },
             { "width": "10%" },
-            { "width": "10%" },
-            { "width": "6%" },
-            { "width": "3%" },
-            { "width": "4%" }
+            { "width": "10%" }
+            
         ]
 
     });
@@ -183,6 +181,7 @@ $( document ).ready(function() {
 
     deleteMovement = async(id) => {
 
+        $('.deleteMovementClass').toggleClass('deleteMovementClassDnone'); 
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -204,6 +203,8 @@ $( document ).ready(function() {
 
         }).then(async (result) => {
 
+            
+            
             if (result.isConfirmed) {
 
                 $.ajaxSetup({
@@ -219,7 +220,8 @@ $( document ).ready(function() {
                         'id': id,
                     },
                     success: function(data) {
-
+                        console.log(data);
+                        
                         if(data.type = 'success')
                         {
                             swalWithBootstrapButtons.fire({
@@ -228,18 +230,20 @@ $( document ).ready(function() {
                                 icon: 'success',
                                 background: '#191c24'
                             })
-
+                            
                             setTimeout(function() {
                                 location.reload();
                             }, 1500);
                         }
                         else{
+                            $(".deleteMvementClass").prop("disabled",false);
                             swalWithBootstrapButtons.fire({
                                 title: 'Cancelada',
                                 text: "Movimentaçao não Encontrada.",
                                 icon: 'success',
                                 background: '#191c24'
                             })
+                            $('.deleteMovementClass').removeClass('deleteMovementClassDnone'); 
                         }
 
                     }
@@ -252,6 +256,7 @@ $( document ).ready(function() {
                     icon: 'success',
                     background: '#191c24'
                 })
+                $('.deleteMovementClass').removeClass('deleteMovementClassDnone'); 
             }
 
         })

@@ -26,7 +26,6 @@ class ProductRequest extends FormRequest
     public function rules(Product $product)
     {
         //$uuid = $this->id;
-
         $rules = [
             'category' => [
                 'required',
@@ -39,10 +38,10 @@ class ProductRequest extends FormRequest
             'sku' => [
                 'required'
             ],
-            'title' => [
+            'description' => [
                 'required',
                 'min:3',
-                'max:60'
+                'max:80'
 
             ],
 
@@ -51,6 +50,7 @@ class ProductRequest extends FormRequest
             'average_cost' => [],
             'sale_price' => [],
             'status' => [],
+           
         ];
 
         return $rules;

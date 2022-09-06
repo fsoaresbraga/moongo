@@ -15,17 +15,7 @@ class OriginTableSeeder extends Seeder
     public function run()
     {
         Origin::create([
-            'name'      => 'Estoque',
-            'status'     => '1'
-        ]);
-
-        Origin::create([
             'name'      => 'Carro',
-            'status'     => '1'
-        ]);
-
-        Origin::create([
-            'name'      => 'Perda',
             'status'     => '1'
         ]);
 
@@ -35,8 +25,9 @@ class OriginTableSeeder extends Seeder
         ]);
 
         Origin::create([
-            'name'      => 'Venda',
+            'name'      => 'Estoque',
             'status'     => '1'
         ]);
+      
     }
 }

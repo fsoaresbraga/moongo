@@ -16,7 +16,12 @@ class CategoryTableSeeder extends Seeder
     {
         
         ProductCategory::create([
-            'name'      => 'Bebidas',
+            'name'      => 'Acessórios ',
+            'status'     => '1'
+        ]);
+        
+        ProductCategory::create([
+            'name'      => 'Snacks ',
             'status'     => '1'
         ]);
 
@@ -25,5 +30,6 @@ class CategoryTableSeeder extends Seeder
             'status'     => '1'
         
         ]);
+
     }
 }

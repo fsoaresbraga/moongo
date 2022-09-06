@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\BrandTableSeeder;
 use Database\Seeders\UsersTableSeeder;
 use Database\Seeders\CategoryTableSeeder;
-use Database\Seeders\ProductsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +26,6 @@ class DatabaseSeeder extends Seeder
             BrandTableSeeder::class,
             CategoryTableSeeder::class,
             UsersTableSeeder::class,
-            CategoryMovementTableSeeder::class,
             TypeMovementTableSeeder::class,
             OriginTableSeeder::class,
             DestinationTableSeeder::class

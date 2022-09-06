@@ -36,8 +36,8 @@
                         <table id="footer-search" class="table  table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th >Descrição </th>
                                     <th class="nosort">SKU</th>
+                                    <th >Descrição </th>
                                     <th >Marca</th>
                                     <th>Categoria</th>
                                     <th class="nosort">Custo</th>
@@ -53,8 +53,8 @@
 
                                 @foreach ($products as $product)
                                     <tr>
-                                        <td>{{$product->title}}</td>
                                         <td>{{$product->sku}}</td>
+                                        <td>{{$product->title}}</td>
                                         <td>{{($product->brand)}}</td>
                                         <td>{{$product->category}}</td>
                                         <td>R$ {{number_format($product->cost, 2, ',', '.')}}</td>
@@ -75,17 +75,17 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th class="input-search">Descrição </th>
-                                    <th class="input-search">SKU</th>
-                                    <th class="input-search">Marca</th>
-                                    <th class="input-search">Categoria</th>
-                                    <th>Custo</th>
-                                    <th>Preço Venda</th>
-                                    <th>Custo Última Compra</th>
+                                    <th class="nosort">SKU</th>
+                                    <th >Descrição </th>
+                                    <th >Marca</th>
+                                    <th>Categoria</th>
+                                    <th class="nosort">Custo</th>
+                                    <th class="nosort">Preço Venda</th>
+                                    <th class="nosort">Custo Última Compra</th>
                                     <th class="nosort">Qtd. Entrada</th>
                                     <th class="nosort">Qtd. Saída</th>
-                                    <th class="nosort">Estoque</th>
-                                    <th>Opção</th>
+                                    <th class="nosort" >Estoque</th>
+                                    <th class="nosort">Opção</th>
                                 </tr>
                             </tfoot>
                         </table>

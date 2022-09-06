@@ -9,11 +9,8 @@ return [
     'not_found_verify_reset_password' => 'Não foi encrontrado o código informado.',
     'success_reset_password' => 'Informe o código que enviamos em seu E-mail.',
     'success_verify_reset_password' => 'Código confirmado com Sucesso.',
-    'taxi_not_created' => "Não foi possivel realizar o Cadastro.",
-
-
-
-
+    'motorist_not_created' => "Não foi possivel realizar o Cadastro.",
+    'motorist_created' => "Motorista criado com Sucesso.",
 
 
 

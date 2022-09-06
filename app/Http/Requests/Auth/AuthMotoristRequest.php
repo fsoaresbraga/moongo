@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthTaxiRequest extends FormRequest
+class AuthMotoristRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class AuthTaxiRequest extends FormRequest
     {
         return [
             'cpf' => ['required', 'min:11', 'max:11'],
-            'password' => [ 'required', 'min:4', 'max:4', 'string'],
+            'password' => [ 'required', 'min:4', 'max:4'],
             'device_name' => ['required', 'string', 'max:200']
         ];
     }

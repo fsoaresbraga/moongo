@@ -20883,3 +20883,14 @@ button.swal2-confirm.btn.btn-success.order-2 {
     margin: 0px 11px 0 0;
 }
 
+.administrator,
+.motorist {
+  font-size: 10px;
+  padding: 4px;
+  margin-left:5px;
+
+}
+
+.deleteMovementClassDnone {
+  display:none;
+}

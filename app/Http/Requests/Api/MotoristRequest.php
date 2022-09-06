@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use App\Models\User;
 use Illuminate\Validation\Rule;
@@ -28,7 +28,10 @@ class MotoristRequest extends FormRequest
         $uuid = $this->id;
 
         $rules = [
-
+            'company' => [
+                'required',
+                'exists:companies,code'
+            ],
             'name' => [
                 'required',
                 'min:3',
@@ -37,21 +40,22 @@ class MotoristRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('taxis')->ignore($uuid)
+                Rule::unique('users')->ignore($uuid)
             ],
 
             'phone' => [
                 'required',
                 'string',
                 'min:11',
-                'max:12'
+                'max:12',
+                Rule::unique('users')->ignore($uuid)
             ],
             'cpf' => [
                 'required',
                 'string',
                 'min:11',
                 'max:11',
-                Rule::unique('taxis')->ignore($uuid)
+                Rule::unique('users')->ignore($uuid)
             ],
             'date_birth' => [
                 'required',
@@ -81,7 +85,7 @@ class MotoristRequest extends FormRequest
             'address' => [
                 'required',
                 'min:3',
-                'max:200',
+                'max:100',
                 'string'
             ],
             'address_number' => [
@@ -89,7 +93,7 @@ class MotoristRequest extends FormRequest
             'neighborhood' => [
                 'required',
                 'min:3',
-                'max:200',
+                'max:100',
                 'string'
             ],
             'complement' => [
@@ -103,7 +107,7 @@ class MotoristRequest extends FormRequest
             'city' => [
                 'required',
                 'min:3',
-                'max:200',
+                'max:100',
                 'string'
             ],
 

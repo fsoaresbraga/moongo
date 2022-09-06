@@ -26,10 +26,27 @@
             <form action="{{route('admin.product.edit', $product->id)}}" method="POST" class="forms-sample">
                 @csrf
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="edit-sku">SKU</label>
+                            <input type="text" name="sku" class="form-control @if($errors->has('sku')) is-invalid  @endif" id="edit-sku" placeholder="SKU" value="{{$product->sku}}">
+                            @if($errors->has('sku'))
+                                <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="edit-description">Descrição </label>
+                            <input type="text" name="description" class="form-control @if($errors->has('description')) is-invalid  @endif" id="dit-description" placeholder="Descrição" value="{{$product->description}}">
+                            @if($errors->has('description'))
+                                <div class="invalid-feedback">{{ $errors->first('description') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group @if($errors->has('brand')) is-invalid  @endif">
-
                             <label>Marca</label>
                             <select class="js-example-basic-single form-control"  name="brand">
                                 <option value="#" disabled selected>informe uma Marca</option>
@@ -57,25 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="edit-sku">SKU</label>
-                            <input type="text" name="sku" class="form-control @if($errors->has('sku')) is-invalid  @endif" id="edit-sku" placeholder="SKU" value="{{$product->sku}}">
-                            @if($errors->has('sku'))
-                                <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="edit-title">Título </label>
-                            <input type="text" name="title" class="form-control @if($errors->has('title')) is-invalid  @endif" id="dit-title" placeholder="Título" value="{{$product->title}}">
-                            @if($errors->has('title'))
-                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
-                            @endif
-                        </div>
-                    </div>
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="edit-cost">Custo</label>

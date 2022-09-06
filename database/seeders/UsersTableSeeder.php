@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -16,6 +17,13 @@ class UsersTableSeeder extends Seeder
     {
 
         User::create([
+            'company_id' => 
+                Company::create([
+                    'name'      => 'Moongo ',
+                    'code'      => 'Moongo ',
+                    'status'     => '1'
+
+            ]),
             'name'      => 'Felipe Soares',
             'email'     => 'felipe@gmail.com',
             'cpf'     => '43677183871',
@@ -32,6 +40,13 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
+            'company_id' => 
+                Company::create([
+                    'name'      => 'CooperTáxi ',
+                    'code'      => 'CooperTáxi ',
+                    'status'     => '1'
+
+            ]),
             'name'      => 'Daniel Wallace',
             'email'     => 'daniel@gmail.com',
             'cpf'     => '43677183872',

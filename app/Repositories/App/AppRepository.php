@@ -87,7 +87,7 @@ class AppRepository {
                 prod.title as title,
                 prod.sale_price as price,
                 prod.image as image,
-                mov.bar_code,
+                prod.sku as bar_code,
                 SUM(IF(tp_mov.name='Entrada', mov.quantity, 0)) - SUM(IF(tp_mov.name='Saída', mov.quantity, 0)) as quantity
 
                 FROM products as prod
@@ -108,6 +108,8 @@ class AppRepository {
                     ON user.id = mov.user_id
 
                 WHERE
+                    mov.deleted_at IS NULL
+                AND
                     user.id = '".$user_id."'
                 AND
                     prod.id = '".$product_id."'

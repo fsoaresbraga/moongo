@@ -17,7 +17,7 @@ class UserCar extends Model
 
     protected $keyType = 'uuid';
 
-    protected $table = 'taxi_cars';
+    protected $table = 'user_cars';
 
     protected $fillable = [
         'user_id', 'car_plate', 'car_renamed', 'model', 'year', 'color'

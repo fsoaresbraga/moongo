@@ -21,7 +21,6 @@ class CreateMovementsTable extends Migration
             $table->uuid('category_movement_id')->nullable(false);
             $table->uuid('type_movement_id')->nullable(false);
             $table->uuid('product_id')->nullable(false);
-            $table->string('bar_code')->nullable(true);
             $table->string('quantity')->nullable(true);
             $table->date('expiration')->nullable(true);
             $table->decimal('cost', 7,2)->nullable(true);

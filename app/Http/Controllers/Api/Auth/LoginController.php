@@ -3,44 +3,42 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use Carbon\Carbon;
-use App\Models\Taxi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ResetPassword;
 use App\Mail\SendMailResetPassword;
-use App\Http\Controllers\Controller;
 
-use App\Http\Resources\TaxiResource;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use App\Jobs\JobSendMailResetPassword;
-use App\Http\Requests\Auth\AuthTaxiRequest;
-use Illuminate\Validation\ValidationException;
+use App\Http\Resources\MotoristResource;
+use App\Http\Requests\Auth\AuthMotoristRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 
 class LoginController extends Controller
 {
-    private $repository_taxi;
+    private $repo_motorist;
     private $repository_password;
-    public function __construct(Taxi $taxi, ResetPassword $password) {
-        $this->repository_taxi = $taxi;
+    public function __construct(User $taxi, ResetPassword $password) {
+        $this->repo_motorist = $taxi;
         $this->repository_password = $password;
     }
 
-    public function login(AuthTaxiRequest $request) {
+    public function login(AuthMotoristRequest $request) {
 
-        $taxi = $this->repository_taxi
-            ->with(['place', 'car'])
+        $motorist = $this->repo_motorist
             ->where('cpf', "$request->cpf")
             ->where('status', 1)
             ->first();
 
-        if (!$taxi || !Hash::check($request->password, $taxi->password)) {
+        //dd($motorist, !$motorist, !Hash::check($request->password, $motorist->password));
+        if (!$motorist || !Hash::check($request->password, $motorist->password)) {
 
             return response()->json(['error' => [config('messages.error_login')]]);
         }
 
-        return (new TaxiResource($taxi))->additional([
-            'token' => $taxi->createToken($request->device_name)->plainTextToken
+        return (new MotoristResource($motorist))->additional([
+            'token' => $motorist->createToken($request->device_name)->plainTextToken
         ]);
     }
 
@@ -67,10 +65,10 @@ class LoginController extends Controller
                 return response()->json(['success' => [config('messages.success_reset_password')]], 200);
             }
 
-            return response()->json(['error' => [config('messages.error_reset_password')]], 404);
+            return response()->json(['error' => [config('messages.error_reset_password')]], 400);
         }
 
-        return response()->json(['error' => [config('messages.not_found_reset_password')]], 404);
+        return response()->json(['error' => [config('messages.not_found_reset_password')]], 400);
     }
 
     public function VerifyTokenResetPassword(Request $request) {
@@ -85,7 +83,7 @@ class LoginController extends Controller
             $finishTime = Carbon::now();
             $time = $finishTime->diff($startTime)->format('%H:%I:%S');
 
-            if($time <= "00:03:00") {
+            if($time <= "00:04:00") {
                 $password->delete();
                 return response()->json(['success' => [config('messages.success_verify_reset_password')]]);
             }

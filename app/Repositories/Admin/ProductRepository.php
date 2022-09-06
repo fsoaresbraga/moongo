@@ -58,7 +58,8 @@ class ProductRepository {
                             ON tp_mov.id = mov.type_movement_id
 
                         WHERE
-
+                            mov.deleted_at IS NULL
+                        AND
                             ((origin.name = 'Compra' && destination.name = 'Estoque' && tp_mov.name = 'Entrada')
                         OR
                             (origin.name = 'Estoque' && destination.name = 'Carro' && tp_mov.name = 'Saída'))
@@ -76,19 +77,21 @@ class ProductRepository {
     public function setStoreProduct(array $req) {
 
         $product = $this->repo_product->create([
-            'brand_id' => $req['brand'],
             'category_id' => $req['category'],
+            'brand_id' => $req['brand'],
             'sku' => $req['sku'],
-            'title' => $req['title'],
-            'image' => null,
-            'status' => 1,
+            'title' => $req['description'],
             'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
             'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,
-            'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null
-
+            'sale_price' => isset($req['sale_price']) ? $this->functions->convertDecimalValue($req['sale_price']) : null,
+            'average_cost' => null,
+            'status' => 1,
+            'image' => null,
+            'user_delete' => null
        ]);
-
+       
        if($product) {
+
             return true;
        }
         return false;
@@ -113,7 +116,7 @@ class ProductRepository {
             'brand_id' => $req['brand'],
             'category_id' => $req['category'],
             'sku' => $req['sku'],
-            'title' => $req['title'],
+            'title' => $req['description'],
             'cost' => isset($req['cost']) ? $this->functions->convertDecimalValue($req['cost']) : null,
             'status' => isset($req['status']) ? 1 : 0,
             'last_purchase_cost' => isset($req['last_purchase_cost']) ? $this->functions->convertDecimalValue($req['last_purchase_cost']) : null,

@@ -37,36 +37,55 @@
                     <table id="movement-search" class="table table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th >Produto </th>
-                                <th class="nosort">Usu. Mov</th>
-                                <th class="nosort">Cód. de Barras</th>
-                                <th >Origen</th>
-                                <th>Destino</th>
-                                <th class="nosort">Cat. Mov</th>
+                                <th>Cód. de Barras</th>
+                                <th >Produto</th>
+                                <th >Usu. Mov</th>
+                                <th>Mov</th>
                                 <th class="nosort">Tipo Mov</th>
-                                <th class="nosort">Validade</th>
                                 <th class="nosort">Qtd</th>
                                 <th class="nosort">Custo</th>
                                 <th class="nosort">Opção</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($movements as $movement)
                                 <tr>
+                                    <td>{{$movement->product->sku}}</td>
                                     <td>{{$movement->product->title}}</td>
-                                    <td>{{$movement->user->name}}</td>
-                                    <td>{{$movement->bar_code}}</td>
-                                    <td>{{($movement->origin->name)}}</td>
-                                    <td>{{($movement->destination->name)}}</td>
-                                    <td>{{($movement->categoryMovement->name)}}</td>
-                                    <td style="font-weight: bold; color: {{($movement->typeMovement->name == "Entrada" ? '#27953d' : '#fc424a')}}">{{($movement->typeMovement->name)}}</td>
-                                    <td>{{(date('d/m/Y', strtotime($movement->expiration)))}}</td>
+                                    <td>
+                                        {{$movement->user->name }} 
+                                        {!!$movement->user->administrator ?  ' 
+                                            <small class="administrator badge badge-success">Adm</small>' 
+                                        : 
+                                            ' <small class="motorist badge badge-warning">Mot</small>'
+                                        !!}
+                                    </td>
+                                    <td>
+                                        @if($movement->origin->name == "Carro" && $movement->destination->name == "Estoque")
+                                            Carro -> Estoque
+                                        @elseif($movement->origin->name == "Carro" && $movement->destination->name == "Perda")
+                                            Carro -> Perda
+                                        @elseif($movement->origin->name == "Carro" && $movement->destination->name == "Venda")
+                                            Carro -> Venda
+                                        @elseif($movement->origin->name == "Compra" && $movement->destination->name == "Estoque")
+                                            Compra -> Estoque   
+                                        @elseif($movement->origin->name == "Estoque" && $movement->destination->name == "Carro")
+                                            Estoque -> Carro
+                                        @elseif($movement->origin->name == "Estoque" && $movement->destination->name == "Perda")
+                                            Estoque -> Perda
+                                        @endif
+                                    </td>
+                                    <td style="font-weight: bold; color: {{($movement->typeMovement->name == "Entrada" ? '#27953d' : '#fc424a')}}" >{{($movement->typeMovement->name)}}</td>
                                     <td>{{$movement->quantity}}</td>
                                     <td>0</td>
                                     <td>
-                                        <a href="{{route('admin.movement.show', $movement->id)}}" class="btn btn-outline-secondary btn-icon-text"> <i class="mdi mdi-file-check btn-icon-append"></i></a>
-                                        <a href="#" onclick="deleteMovement('{{$movement->id}}')" class="btn btn-outline-danger btn-icon-text"> <i class="mdi mdi mdi-delete btn-icon-append"></i></a>
+                                        @php
+                                            /*
+                                                <a href="{{route('admin.movement.show', $movement->id)}}" class="btn btn-outline-secondary btn-icon-text"> <i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                            */
+                                        @endphp
+                                        
+                                        <a href="#" onclick="deleteMovement('{{$movement->id}}')" class="btn btn-outline-danger btn-icon-text deleteMovementClass"> <i class="mdi mdi mdi-delete btn-icon-append"></i></a>
                                     </td>
 
                                 </tr>
@@ -74,14 +93,11 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Produto </th>
+                                <th>Cód. de Barras</th>
+                                <th>Produto</th>
                                 <th class="nosort">Usu. Mov</th>
-                                <th class="nosort">Cód. de Barras</th>
-                                <th>Origen</th>
-                                <th>Destino</th>
-                                <th class="nosort">Cat. Mov</th>
+                                <th>Mov</th>
                                 <th class="nosort">Tipo Mov</th>
-                                <th class="nosort">Validade</th>
                                 <th class="nosort">Qtd</th>
                                 <th class="nosort">Custo</th>
                                 <th class="nosort">Opção</th>

@@ -20,17 +20,25 @@ class Product extends Model
 
     protected $table = 'products';
 
-    //protected $fillable = [];
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'category_id', 'brand_id', 'sku', 'title', 'cost', 'last_purchase_cost', 'average_cost',
-         'sale_price', 'user_delete', 'image', 'status'
+            'category_id', 
+            'brand_id', 
+            'sku', 
+            'title',
+            'cost', 
+            'last_purchase_cost',
+            'average_cost',
+            'sale_price',
+            'status',
     ];
+
+
+
 
 
     public function brand() {
@@ -41,5 +49,4 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class);
     }
 }
-
 

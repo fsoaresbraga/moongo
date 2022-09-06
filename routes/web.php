@@ -35,16 +35,16 @@ Route::group(['prefix'=>'area_restrita','as'=>'admin.'], function(){
         Route::get('/editar/produto/{id}', [ProductController::class, 'show'])->name('product.show');
         Route::post('/criar/produto', [ProductController::class, 'store'])->name('product.store');
         Route::post('/editar/produto/{id}', [ProductController::class, 'update'])->name('product.edit');
-        Route::delete('/deletar/produto/{id}', [ProductController::class, 'delete'])->name('product.delete');
+        #Route::delete('/deletar/produto/{id}', [ProductController::class, 'delete'])->name('product.delete');
         /*ROTAS DE PRODUTOS*/
 
 
         /*ROTAS DE MOVIMENTAÇÕES*/
         Route::get('/movimentaçoes', [MovementController::class, 'index'])->name('movement.index');
         Route::get('/criar/movimentacao', [MovementController::class, 'create'])->name('movement.create');
-        Route::get('/editar/movimentacao/{id}', [MovementController::class, 'show'])->name('movement.show');
+        #Route::get('/editar/movimentacao/{id}', [MovementController::class, 'show'])->name('movement.show');
         Route::post('/criar/movimentacao', [MovementController::class, 'store'])->name('movement.store');
-        Route::post('/editar/movimentacao/{id}', [MovementController::class, 'update'])->name('movement.edit');
+        #Route::post('/editar/movimentacao/{id}', [MovementController::class, 'update'])->name('movement.edit');
         Route::delete('/deletar/movimentacao/{id}', [MovementController::class, 'delete'])->name('movement.delete');
         /*ROTAS DE MOVIMENTAÇÕES*/
     });

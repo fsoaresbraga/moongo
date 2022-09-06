@@ -31,7 +31,7 @@
                     @endif
                   </div>
                   <div class="form-group">
-                    <label>Senha *</label>
+                    <label>Senha*</label>
                     <input type="password" name="password" placeholder="Senha" class="form-control p_input @if($errors->has('password')) is-invalid  @endif">
                     @if($errors->has('password'))
                         <div class="invalid-feedback">{{ $errors->first('password') }}</div>
@@ -50,7 +50,7 @@
 
     <script src="{{asset('admin/vendors/js/vendor.bundle.base.js')}}"></script>
     <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
-    <script src="{{asset('admin/js/bootstrap-growl.min.js')}}"></script>
+    <script src="{{asset('admin/vendors/bootstrap-growl/bootstrap-growl.min.js')}}"></script>
     <script>
         @if(Session::has('message'))
             $.growl({

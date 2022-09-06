@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\MotoristRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MotoristResource;
-use App\Repositories\MotoristRepository;
+use App\Http\Requests\Api\MotoristRequest;
+use App\Repositories\Api\MotoristRepository;
+
 
 class MotoristController extends Controller
 {
@@ -26,10 +27,10 @@ class MotoristController extends Controller
 
         if(gettype($motorist) == 'object') {
 
-            return new MotoristResource($motorist);
+            return response()->json(['success' => [config('messages.motorist_created')],200]);
         }
 
-        return response()->json(['error' => [config('messages.taxi_not_created')]]);
+        return response()->json(['error' => [config('messages.motorist_not_created')],400]);
 
     }
 

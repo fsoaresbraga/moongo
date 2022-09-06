@@ -15,12 +15,12 @@ class DestinationTableSeeder extends Seeder
     public function run()
     {
         Destination::create([
-            'name'      => 'Estoque',
+            'name'      => 'Carro',
             'status'     => '1'
         ]);
 
         Destination::create([
-            'name'      => 'Carro',
+            'name'      => 'Estoque',
             'status'     => '1'
         ]);
 
@@ -30,13 +30,9 @@ class DestinationTableSeeder extends Seeder
         ]);
 
         Destination::create([
-            'name'      => 'Compra',
-            'status'     => '1'
-        ]);
-
-        Destination::create([
             'name'      => 'Venda',
             'status'     => '1'
         ]);
+       
     }
 }

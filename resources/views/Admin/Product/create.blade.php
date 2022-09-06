@@ -28,11 +28,30 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <div class="form-group @if($errors->has('brand')) is-invalid  @endif">
+                        <div class="form-group">
+                            <label for="sku">SKU</label>
+                            <input type="text" name="sku" class="form-control @if($errors->has('sku')) is-invalid  @endif" id="sku" value="{{old('sku')}}">
+                            @if($errors->has('sku'))
+                                <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
+                            @endif
+                        </div>
+                    </div>
 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="description">Descrição </label>
+                            <input type="text" name="description" class="form-control @if($errors->has('description')) is-invalid  @endif" id="description" value="{{old('description')}}">
+                            @if($errors->has('description'))
+                                <div class="invalid-feedback">{{ $errors->first('description') }}</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group @if($errors->has('brand')) is-invalid  @endif">
                             <label>Marca</label>
                             <select class="js-example-basic-single form-control"  name="brand">
-                                <option value="#" disabled selected>informe uma Marca</option>
+                                <option value="#" disabled selected></option>
                                 @foreach($brands as $brand)
                                     <option value="{{$brand->id}}">{{$brand->name}}</option>
                                 @endforeach
@@ -46,7 +65,7 @@
                         <div class="form-group @if($errors->has('category')) is-invalid  @endif">
                             <label>Categoria</label>
                             <select class="js-example-basic-single form-control"  name="category">
-                                <option value="#" disabled selected>informe uma Categoria</option>
+                                <option value="#" disabled selected></option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
@@ -57,42 +76,23 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="sku">SKU</label>
-                            <input type="text" name="sku" class="form-control @if($errors->has('sku')) is-invalid  @endif" id="sku" placeholder="SKU" value="{{old('sku')}}">
-                            @if($errors->has('sku'))
-                                <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="title">Título </label>
-                            <input type="text" name="title" class="form-control @if($errors->has('title')) is-invalid  @endif" id="title" placeholder="Título" value="{{old('title')}}">
-                            @if($errors->has('title'))
-                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
-                            @endif
-                        </div>
-                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="cost">Custo</label>
-                            <input type="text" name="cost" class="form-control money" id="cost" placeholder="Custo" value="{{old('cost')}}">
+                            <input type="text" name="cost" class="form-control money" id="cost" value="{{old('cost')}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="last_purchase_cost">Custo Última Compra</label>
-                            <input type="text" name="last_purchase_cost" class="form-control money" id="last_purchase_cost" placeholder="Custo Última Compra" value="{{old('last_purchase_cost')}}">
+                            <input type="text" name="last_purchase_cost" class="form-control money" id="last_purchase_cost" value="{{old('last_purchase_cost')}}">
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="sale_price">Preço Venda</label>
-                            <input type="text" name="sale_price" class="form-control money" id="sale_price" placeholder="Preço Venda" value="{{old('sale_price')}}">
+                            <input type="text" name="sale_price" class="form-control money" id="sale_price" value="{{old('sale_price')}}">
                         </div>
                     </div>
 

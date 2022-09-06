@@ -28,7 +28,7 @@ class Movement extends Model
      */
     protected $fillable = [
         'user_id', 'origin_id', 'destination_id', 'category_movement_id', 'type_movement_id',
-        'product_id', 'bar_code', 'quantity', 'expiration', 'cost', 'user_delete'
+        'product_id', 'quantity', 'expiration', 'cost', 'user_delete'
     ];
 
 
@@ -42,10 +42,6 @@ class Movement extends Model
 
     public function destination() {
         return $this->belongsTo(Destination::class);
-    }
-
-    public function categoryMovement() {
-        return $this->belongsTo(CategoryMovement::class);
     }
 
     public function typeMovement() {

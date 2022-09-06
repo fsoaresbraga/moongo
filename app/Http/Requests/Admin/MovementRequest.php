@@ -28,23 +28,8 @@ class MovementRequest extends FormRequest
         //$uuid = $this->id;
 
         $rules = [
-            'origin' => [
+            'movement' => [
                 'required',
-                'exists:origins,id'
-            ],
-            'destination' => [
-                'required',
-                'exists:destinations,id'
-            ],
-            'category_movement' => [
-                'required',
-                'exists:category_movements,id'
-            ],
-
-            'type_movement' => [
-                'required',
-                'exists:type_movements,id'
-
             ],
 
             'product' => [
@@ -52,17 +37,8 @@ class MovementRequest extends FormRequest
                 'exists:products,id'
             ],
 
-            'bar_code' => [
-                'required',
-            ],
-
             'quantity' => [
                 'required'
-            ],
-
-            'date_expiration' => [
-                'required',
-                'date_format:d/m/Y'
             ],
 
             'cost' => [],

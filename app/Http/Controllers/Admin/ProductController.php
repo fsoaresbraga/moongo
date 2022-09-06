@@ -54,6 +54,7 @@ class ProductController extends Controller
 
         $product = $this->repo_product->setStoreProduct($request->validated());
 
+        //dd($product);
         if($product) {
             return redirect()->route('admin.product.index')->with(config('messages.successCreateProduct'));
         }
