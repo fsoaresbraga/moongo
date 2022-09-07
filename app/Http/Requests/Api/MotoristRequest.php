@@ -144,4 +144,31 @@ class MotoristRequest extends FormRequest
 
         return $rules;
     }
+
+    public function attributes()
+    {
+        return [
+            'company' => 'Companhia',
+            'name' => 'Nome',
+            'email' => 'E-mail',
+            'cpf' => 'CPF',
+            'phone' => 'Telefone',
+            'date_birth' => 'Data de Nascimento',
+            'gender' => 'Gênero',
+            'password' => 'Senha',
+            'image' => 'Imagem',
+            'zipcode' => 'CEP',
+            'address' => 'Endereço',
+            'address_number' => 'Número',
+            'neighborhood' => 'Bairro',
+            'complement' => 'Complemento',
+            'state' => 'Estado',
+            'city' => 'Cidade',
+            'car_plate' => 'Placa',
+            'car_renamed' => 'Renavam',
+            'model' => 'Modelo',
+            'year' => 'Ano',
+            'color' => 'Cor',
+        ];
+    }
 }

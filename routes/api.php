@@ -12,8 +12,10 @@ use App\Http\Controllers\Api\{
 Route::get('/', function() {
     return response()->json(['success' => true]);
 });
-
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/reset/password', [LoginController::class, 'resetPassword'])->name('reset.password');
 Route::post('/verify/token/password', [LoginController::class, 'VerifyTokenResetPassword'])->name('verify.token.reset.password');
+Route::post('/new/password', [LoginController::class, 'newPassword'])->name('new.password');
+
+Route::get('/verify/profile', [MotoristController::class, 'verifyProfileMotorist'])->name('verify.profile.motorist');
 Route::post('/create/motorist', [MotoristController::class, 'store'])->name('store.motorist');

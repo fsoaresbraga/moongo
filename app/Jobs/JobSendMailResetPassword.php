@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Taxi;
+use App\Models\User;
 use App\Models\ResetPassword;
 use Illuminate\Bus\Queueable;
 use App\Mail\SendMailResetPassword;
@@ -12,7 +12,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 
 class JobSendMailResetPassword implements ShouldQueue
 {
@@ -25,13 +24,13 @@ class JobSendMailResetPassword implements ShouldQueue
      */
     public $tries = 1;
 
-    private $taxi;
+    private $motorist;
 
     private $password;
 
-    public function __construct(Taxi $taxi, ResetPassword $password)
+    public function __construct(User $motorist, ResetPassword $password)
     {
-        $this->taxi = $taxi;
+        $this->motorist = $motorist;
         $this->password = $password;
 
 
@@ -45,7 +44,7 @@ class JobSendMailResetPassword implements ShouldQueue
     public function handle()
     {
         try{
-            Mail::to($this->taxi->email)->send(new SendMailResetPassword($this->taxi, $this->password));
+            Mail::to($this->motorist->email)->send(new SendMailResetPassword($this->motorist, $this->password));
         }catch(\Exception $e){
             Log::error($e->getMessage());
         }

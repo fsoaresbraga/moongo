@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,14 @@ class ResetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'cpf' => ['required', 'min:11', 'max:11'],
+            'cpf' => ['exists:users,cpf','required', 'min:11', 'max:11'],
+        ];
+    }
+    
+    public function attributes()
+    {
+        return [
+            'cpf' => 'CPF'
         ];
     }
 }

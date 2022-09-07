@@ -16,12 +16,12 @@ class SendMailResetPassword extends Mailable
      *
      * @return void
      */
-    private $taxi;
+    private $motorist;
     private $password;
 
-    public function __construct($taxi, $password) {
+    public function __construct($motorist, $password) {
 
-        $this->taxi = $taxi;
+        $this->motorist = $motorist;
         $this->password = $password;
     }
 
@@ -34,6 +34,6 @@ class SendMailResetPassword extends Mailable
         return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
         ->subject('Resetar Senha Moongo')
         ->view('Emails.resetPassword')
-        ->with(['taxi' => $this->taxi, 'password' => $this->password]);
+        ->with(['motorist' => $this->motorist, 'password' => $this->password]);
     }
 }

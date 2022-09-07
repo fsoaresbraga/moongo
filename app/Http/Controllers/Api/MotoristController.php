@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MotoristResource;
-use App\Http\Requests\Api\MotoristRequest;
-use App\Repositories\Api\MotoristRepository;
 
+use App\Http\Requests\Api\MotoristRequest;
+use App\Http\Requests\Api\VerifyProfileMotoristRequest;
+
+use App\Repositories\Api\MotoristRepository;
 
 class MotoristController extends Controller
 {
@@ -27,10 +27,17 @@ class MotoristController extends Controller
 
         if(gettype($motorist) == 'object') {
 
-            return response()->json(['success' => [config('messages.motorist_created')],200]);
+            return response()->json(['success' => [config('messages.created_success')]], 200);
         }
 
-        return response()->json(['error' => [config('messages.motorist_not_created')],400]);
+        return response()->json(['error' => [config('messages.not_created')]], 400);
+
+    }
+
+    public function verifyProfileMotorist(VerifyProfileMotoristRequest $request) {
+        //$validated = $request->validated();
+
+        return response()->json(['success' => [config('messages.validated_profile_motorist')]],200);
 
     }
 

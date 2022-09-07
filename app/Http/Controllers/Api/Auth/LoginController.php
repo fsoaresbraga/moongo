@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Api\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+
 use App\Models\ResetPassword;
-use App\Mail\SendMailResetPassword;
+
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+
 use App\Jobs\JobSendMailResetPassword;
 use App\Http\Resources\MotoristResource;
-use App\Http\Requests\Auth\AuthMotoristRequest;
-use App\Http\Requests\Auth\ResetPasswordRequest;
+
+use App\Http\Requests\Api\Auth\NewPasswordRequest;
+use App\Http\Requests\Api\Auth\AuthMotoristRequest;
+use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 
 class LoginController extends Controller
 {
@@ -31,7 +36,6 @@ class LoginController extends Controller
             ->where('status', 1)
             ->first();
 
-        //dd($motorist, !$motorist, !Hash::check($request->password, $motorist->password));
         if (!$motorist || !Hash::check($request->password, $motorist->password)) {
 
             return response()->json(['error' => [config('messages.error_login')]]);
@@ -44,22 +48,22 @@ class LoginController extends Controller
 
     public function resetPassword(ResetPasswordRequest $request) {
 
-        $taxi = $this->repository_taxi
+        $motorist = $this->repo_motorist
             ->where('cpf', "$request->cpf")
             ->where('status', 1)
             ->first();
 
-        if(isset($taxi)) {
+        if(isset($motorist)) {
 
             $password = $this->repository_password::create([
-                'cpf' => $taxi->cpf,
+                'cpf' => $motorist->cpf,
                 'token' => mt_rand(1111,9999),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
 
             if($password) {
                 //dd($taxi->email);
-                JobSendMailResetPassword::dispatch($taxi, $password);
+                JobSendMailResetPassword::dispatch($motorist, $password);
 
 
                 return response()->json(['success' => [config('messages.success_reset_password')]], 200);
@@ -84,12 +88,11 @@ class LoginController extends Controller
             $time = $finishTime->diff($startTime)->format('%H:%I:%S');
 
             if($time <= "00:04:00") {
-                $password->delete();
-                return response()->json(['success' => [config('messages.success_verify_reset_password')]]);
+                
+                return response()->json(['success' => [config('messages.success_verify_reset_password')]], 200);
             }
 
-            $password->delete();
-            return response()->json(['error' => [config('messages.error_verify_reset_password')]]);
+            return response()->json(['error' => [config('messages.error_verify_reset_password')]], 400);
 
            }
 
@@ -97,5 +100,33 @@ class LoginController extends Controller
         }
 
         return response()->json(['error' => [config('messages.not_found_verify_reset_password')]]);
+    }
+
+    public function newPassword(NewPasswordRequest $request) {
+        $req = $request->validated();
+
+        $get_token = DB::table('password_resets')
+            ->where('cpf', $req['cpf'])
+            ->where('token', $req['code'])
+            ->first();
+
+        if(!isset($get_token)) {
+            return response()->json(['error' => [config('messages.not_found_verify_reset_password')]], 400);
+        }
+
+        DB::table('password_resets')->delete($get_token->id);
+
+        $motorist = $this->repo_motorist->where('cpf', $req['cpf'])->first();
+
+        $password = $motorist->update([
+            'password' => Hash::make($req['password']),
+        ]);
+
+        if($password) {
+            return response()->json(['success' => [config('messages.created_new_password')]],200);
+        }
+
+        return response()->json(['success' => [config('messages.not_created')]],400);
+
     }
 }
