@@ -4,14 +4,15 @@ namespace App\Repositories\Api;
 
 use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Support\Str;
-use App\Mail\SendMailWelcome;
-
-use App\Jobs\JobSendMailWelcome;
 use App\Models\Company;
+use Illuminate\Support\Str;
+
+use App\Mail\SendMailWelcome;
+use App\Jobs\JobSendMailWelcome;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MotoristRepository {
@@ -92,11 +93,22 @@ class MotoristRepository {
     private function generateQrCode ($hash) {
 
         $url_qr_code = config('app.url').'/'.$hash;
-        $name_qr_code = uniqid().'.svg';
-        $path_qr_code = public_path('/assets/qrCodes/motorist/'.$name_qr_code);
+        $name_qr_code = uniqid().'.png';
         $local_qr_code = '/assets/qrCodes/motorist/'.$name_qr_code;
+        
+        //$path_qr_code = public_path('/assets/qrCodes/motorist/'.$name_qr_code);
+        //QrCode::generate($url_qr_code, $path_qr_code);
 
-        QrCode::generate($url_qr_code, $path_qr_code);
+        $image = QrCode::format('png')
+            //->merge('img/t.jpg', 0.1, true)
+            ->size(400)->errorCorrection('H')
+            ->generate($url_qr_code);
+        
+        $output_file = '/storage/img/qr-code/motorist/' . $name_qr_code;
+        Storage::disk('public')->put($output_file, $image);
+        //storage/app/public/img/qr-code/img-1557309130.png
+
+       
 
         return $local_qr_code;
     }

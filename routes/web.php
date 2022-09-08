@@ -54,7 +54,7 @@ Route::group(['prefix'=>'area_restrita','as'=>'admin.'], function(){
 
 
 /*PASSAGER -> APP PASSAGEIRO*/
-Route::get('/{hash}', [AppController::class, 'index'])->name('home');
+Route::get('/motorista/{hash}', [AppController::class, 'index'])->name('home');
 Route::get('/get/carrinho', [AppController::class, 'addCart'])->name('cart.add');
 Route::get('/{hash}/carrinho', [AppController::class, 'cartView'])->name('cart.view');
 Route::get('/{movement}/checkout', [AppController::class, 'checkoutView'])->name('checkout.view');
@@ -66,5 +66,6 @@ Route::post('/send/carrinho', [AppController::class, 'storeCart'])->name('cart.s
 Route::get('/', function() {
     return view('LandingPage.desktop');
  });
+ 
 Route::post('/send/contact', [SiteController::class, 'sendContatct'])->name('send.contact');
 /*LAANDINPAGE -> SITE APRESENTAÇÃO MOONGO*/

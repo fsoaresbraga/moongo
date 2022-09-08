@@ -40,7 +40,7 @@ class MotoristRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($uuid)
+                Rule::unique('users', 'email')->ignore($uuid)
             ],
 
             'phone' => [
@@ -48,14 +48,14 @@ class MotoristRequest extends FormRequest
                 'string',
                 'min:11',
                 'max:12',
-                Rule::unique('users')->ignore($uuid)
+                Rule::unique('users', 'phone')->ignore($uuid)
             ],
             'cpf' => [
                 'required',
                 'string',
                 'min:11',
                 'max:11',
-                Rule::unique('users')->ignore($uuid)
+                Rule::unique('users', 'cpf')->ignore($uuid)
             ],
             'date_birth' => [
                 'required',

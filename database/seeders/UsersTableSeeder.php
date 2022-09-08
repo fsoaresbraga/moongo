@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
                     'code'      => 'Moongo ',
                     'status'     => '1'
 
-            ]),
+            ])->id,
             'name'      => 'Felipe Soares',
             'email'     => 'felipe@gmail.com',
             'cpf'     => '43677183871',
@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
                     'code'      => 'CooperTáxi ',
                     'status'     => '1'
 
-            ]),
+            ])->id,
             'name'      => 'Daniel Wallace',
             'email'     => 'daniel@gmail.com',
             'cpf'     => '43677183872',
